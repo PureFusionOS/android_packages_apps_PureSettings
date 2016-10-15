@@ -24,6 +24,13 @@
             android:summary="@string/dbl_tap_vib_summary"
             android:title="@string/dbl_tap_vib_title" />
 
+        <ListPreference
+            android:key="media_scanner_on_boot"
+            android:title="@string/media_scanner_on_boot_title"
+            android:entries="@array/media_scanner_on_boot_entries"
+            android:entryValues="@array/media_scanner_on_boot_values"
+            android:persistent="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

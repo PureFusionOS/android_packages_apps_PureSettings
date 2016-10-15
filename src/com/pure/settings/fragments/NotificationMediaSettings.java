@@ -24,6 +24,7 @@ import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
+import android.support.v14.preference.SwitchPreference;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -35,6 +36,10 @@ public class NotificationMediaSettings extends SettingsPreferenceFragment
     private static final String KEY_SHOW_TICKER = "status_bar_show_ticker";
 
     private ListPreference mTicker;
+
+    private static final String PREF_MEDIA_SCANNER_ON_BOOT = "media_scanner_on_boot";
+
+    private ListPreference mMsob;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,13 @@ public class NotificationMediaSettings extends SettingsPreferenceFragment
                 0, UserHandle.USER_CURRENT);
         mTicker.setValue(String.valueOf(tickerMode));
         mTicker.setSummary(mTicker.getEntry());
+
+        mMsob = (ListPreference) findPreference(PREF_MEDIA_SCANNER_ON_BOOT);
+        mMsob.setValue(String.valueOf(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.MEDIA_SCANNER_ON_BOOT, 0)));
+        mMsob.setSummary(mMsob.getEntry());
+        mMsob.setOnPreferenceChangeListener(this);
+
     }
 
     @Override
@@ -66,6 +78,15 @@ public class NotificationMediaSettings extends SettingsPreferenceFragment
                     UserHandle.USER_CURRENT);
             int index = mTicker.findIndexOfValue((String) newValue);
             mTicker.setSummary(mTicker.getEntries()[index]);
+            return true;
+        }
+
+        if (preference == mMsob) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.MEDIA_SCANNER_ON_BOOT,
+                    Integer.valueOf(String.valueOf(newValue)));
+            mMsob.setValue(String.valueOf(newValue));
+            mMsob.setSummary(mMsob.getEntry());
             return true;
         }
         return false;
