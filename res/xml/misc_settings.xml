@@ -20,6 +20,11 @@
         android:summary="@string/toast_icon_summary"
         android:title="@string/toast_icon_title" />
 
+    <PreferenceScreen
+        android:key="wakelock_blocker"
+        android:fragment="com.nitrogen.settings.fragments.WakeLockBlocker"
+        android:title="@string/wakelock_blocker_title" />
+
     <ListPreference
         android:dialogTitle="@string/pref_scrollingcache_title"
         android:entries="@array/entries_scrollingcache"
