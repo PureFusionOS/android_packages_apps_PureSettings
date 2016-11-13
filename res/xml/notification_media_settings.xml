@@ -64,6 +64,12 @@
             android:summary="@string/battery_low_notif_summary"
             android:title="@string/battery_low_notif_title" />
 
+        <com.pure.settings.preferences.SystemSettingSwitchPreference
+            android:key="disable_fc_notifications"
+            android:title="@string/disable_fc_notifications_title"
+            android:summary="@string/disable_fc_notifications_summary"
+            android:defaultValue="false" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
