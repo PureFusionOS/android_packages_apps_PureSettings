@@ -55,10 +55,21 @@
         android:summary="@string/sensor_block_summary"
         android:defaultValue="false" />
 
-        <com.pure.settings.preferences.SystemSettingSwitchPreference
-            android:key="mtp_dirty_hack"
-            android:title="@string/enable_mtp_dirtyhack_title"
-            android:summary="@string/enable_mtp_dirtyhack_summary"
-            android:defaultValue="true" />
+    <com.pure.settings.preferences.SystemSettingSwitchPreference
+        android:key="mtp_dirty_hack"
+        android:title="@string/enable_mtp_dirtyhack_title"
+        android:summary="@string/enable_mtp_dirtyhack_summary"
+        android:defaultValue="true" />
+
+    <PreferenceCategory
+        android:key="screenstate_options"
+        android:title="@string/screen_state_toggles_title" >
+
+    <Preference
+        android:key="screenstate_category"
+        android:title="@string/screen_state_toggles_title"
+        android:fragment="com.pure.settings.ScreenStateToggles" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>
