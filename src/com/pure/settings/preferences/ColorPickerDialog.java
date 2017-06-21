@@ -20,8 +20,6 @@ package com.pure.settings.preferences;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
 import android.provider.Settings;
 import android.view.LayoutInflater;
@@ -57,10 +55,6 @@ public class ColorPickerDialog extends Dialog implements OnColorChangedListener,
     private int mUserBorder;
 
     private OnColorChangedListener mListener;
-
-    public interface OnColorChangedListener {
-        public void onColorChanged(int color);
-    }
 
     public ColorPickerDialog(Context context, int initialColor, int defaultColor, String initKey, String itemTitle) {
         super(context);
@@ -131,7 +125,7 @@ public class ColorPickerDialog extends Dialog implements OnColorChangedListener,
             mHex.setText(ColorPickerPreference.convertToARGB(color).toUpperCase(Locale.getDefault()));
         }
         if (mSetButton != null) {
-           mSetButton.setOnClickListener(new View.OnClickListener() {
+            mSetButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
@@ -199,7 +193,7 @@ public class ColorPickerDialog extends Dialog implements OnColorChangedListener,
         }
     }
 
-/* Maybe add in a pass for xml resource default color when method is called to pass through to default for setColor... */
+    /* Maybe add in a pass for xml resource default color when method is called to pass through to default for setColor... */
     public void setColorAndClickActionCustom(final ColorPickerPanelView previewRect, final String extraKey, final int color) {
         if (previewRect != null) {
             final String customKey = (Settings.Global.getInt(getContext().getContentResolver(), GLOBAL_COLOR_USER, 0) == 0) ? "globalcolor" : mKey;
@@ -247,5 +241,9 @@ public class ColorPickerDialog extends Dialog implements OnColorChangedListener,
             }
         }
         dismiss();
+    }
+
+    public interface OnColorChangedListener {
+        void onColorChanged(int color);
     }
 }

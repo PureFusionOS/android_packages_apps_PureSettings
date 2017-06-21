@@ -19,10 +19,6 @@
 
 package com.pure.settings;
 
-import com.android.internal.utils.du.Config.ActionConfig;
-import com.android.settings.R;
-import com.pure.settings.CustomActionListAdapter;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -31,6 +27,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
+
+import com.android.internal.utils.du.Config.ActionConfig;
+import com.android.settings.R;
 
 public class ActionPickerDialogActivity extends Activity implements
         ShortcutPickHelper.OnPickListener {
@@ -49,7 +48,7 @@ public class ActionPickerDialogActivity extends Activity implements
         mHasDefault = getIntent().getBooleanExtra("has_defaults", false);
         String[] excludedActions = getIntent().getStringArrayExtra("excluded_actions");
         if (excludedActions != null) {
-            for (int i = 0; i < excludedActions.length; i ++) {
+            for (int i = 0; i < excludedActions.length; i++) {
                 mCustomActionListAdapter.removeAction(excludedActions[i]);
             }
         }

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2017 The Pure Nexus Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2017 The Pure Nexus Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,75 +12,74 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <com.pure.settings.preferences.SystemSettingSwitchPreference
+        android:defaultValue="false"
         android:key="volume_keys_control_media_stream"
-        android:title="@string/volume_keys_control_media_stream_title"
         android:summary="@string/volume_keys_control_media_stream_summary"
-        android:defaultValue="false" />
+        android:title="@string/volume_keys_control_media_stream_title" />
 
     <com.pure.settings.preferences.SystemSettingSwitchPreference
+        android:defaultValue="false"
         android:key="volume_wake_screen"
-        android:title="@string/volbtn_wake_device_title"
         android:summary="@string/button_wake_summary"
-        android:defaultValue="false" />
+        android:title="@string/volbtn_wake_device_title" />
 
     <com.pure.settings.preferences.SystemSettingSwitchPreference
+        android:defaultValue="false"
         android:key="volbtn_music_controls"
-        android:title="@string/volbtn_music_controls_title"
         android:summary="@string/volbtn_music_controls_summary"
-        android:defaultValue="false" />
+        android:title="@string/volbtn_music_controls_title" />
 
     <ListPreference
-        android:key="wired_ringtone_focus_mode"
-        android:title="@string/wired_ringtone_focus_mode_title"
         android:entries="@array/wired_ringtone_focus_mode_entries"
-        android:entryValues="@array/wired_ringtone_focus_mode_values" />
+        android:entryValues="@array/wired_ringtone_focus_mode_values"
+        android:key="wired_ringtone_focus_mode"
+        android:title="@string/wired_ringtone_focus_mode_title" />
 
     <com.pure.settings.preferences.SystemSettingSwitchPreference
+        android:defaultValue="false"
         android:key="swap_volume_buttons"
-        android:title="@string/swap_volume_buttons_title"
         android:summary="@string/swap_volume_buttons_summary"
-        android:defaultValue="false"/>
+        android:title="@string/swap_volume_buttons_title" />
 
     <ListPreference
-        android:key="volume_key_cursor_control"
         android:dialogTitle="@string/volbtn_cursor_control_title"
-        android:title="@string/volbtn_cursor_control_title"
         android:entries="@array/volbtn_cursor_control_entries"
         android:entryValues="@array/volbtn_cursor_control_values"
-        android:persistent="false" />
+        android:key="volume_key_cursor_control"
+        android:persistent="false"
+        android:title="@string/volbtn_cursor_control_title" />
 
     <ListPreference
-        android:key="screenrecord_chord_type"
-        android:title="@string/screen_record_chord_title"
         android:entries="@array/screen_record_chord_entries"
-        android:entryValues="@array/screen_record_chord_values" />
+        android:entryValues="@array/screen_record_chord_values"
+        android:key="screenrecord_chord_type"
+        android:title="@string/screen_record_chord_title" />
 
     <com.pure.settings.preferences.SecureSettingSwitchPreference
+        android:defaultValue="true"
         android:key="sysui_volume_down_silent"
-        android:title="@string/volbtn_down_zen_title"
         android:summary="@string/volbtn_down_zen_summary"
-        android:defaultValue="true"/>
+        android:title="@string/volbtn_down_zen_title" />
 
     <com.pure.settings.preferences.SecureSettingSwitchPreference
+        android:defaultValue="true"
         android:key="sysui_volume_up_silent"
-        android:title="@string/volbtn_up_zen_title"
         android:summary="@string/volbtn_up_zen_summary"
-        android:defaultValue="true" />
+        android:title="@string/volbtn_up_zen_title" />
 
     <com.pure.settings.preferences.SecureSettingSwitchPreference
+        android:defaultValue="false"
         android:key="sysui_show_full_zen"
-        android:title="@string/vol_zen_title"
         android:summary="@string/vol_zen_summary"
-        android:defaultValue="false"/>
+        android:title="@string/vol_zen_title" />
 
     <PreferenceScreen
         android:fragment="com.pure.settings.fragments.VolumeStepsSettings"
         android:key="vol_steps"
-        android:title="@string/volume_steps_title"
-        android:summary="@string/volume_steps_summary" />
+        android:summary="@string/volume_steps_summary"
+        android:title="@string/volume_steps_title" />
 
 </PreferenceScreen>

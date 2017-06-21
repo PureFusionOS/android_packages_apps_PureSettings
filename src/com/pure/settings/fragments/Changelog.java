@@ -17,27 +17,24 @@
 package com.pure.settings.fragments;
 
 import android.app.Fragment;
-import android.os.Bundle;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.android.settings.R;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Changelog extends Fragment {
 
@@ -45,7 +42,7 @@ public class Changelog extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         InputStreamReader inputReader = null;
         String text = null;
         StringBuilder data = new StringBuilder();
@@ -72,21 +69,21 @@ public class Changelog extends Fragment {
             }
         }
 
-    SpannableStringBuilder sb = new SpannableStringBuilder(data);
+        SpannableStringBuilder sb = new SpannableStringBuilder(data);
         Matcher m = p.matcher(data);
-        while (m.find()){
-          sb.setSpan(new ForegroundColorSpan(Color.rgb(96,125,139)),m.start(1), m.end(1), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-          sb.setSpan(new StyleSpan(Typeface.BOLD),m.start(1),m.end(1),Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-          sb.setSpan(new ForegroundColorSpan(Color.rgb(69,90,100)),m.start(3), m.end(3), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        while (m.find()) {
+            sb.setSpan(new ForegroundColorSpan(Color.rgb(96, 125, 139)), m.start(1), m.end(1), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            sb.setSpan(new StyleSpan(Typeface.BOLD), m.start(1), m.end(1), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            sb.setSpan(new ForegroundColorSpan(Color.rgb(69, 90, 100)), m.start(3), m.end(3), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         }
         m = p2.matcher(data);
-        while (m.find()){
-          sb.setSpan(new StyleSpan(Typeface.BOLD),m.start(1), m.end(1), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-          sb.setSpan(new ForegroundColorSpan(Color.rgb(33,39,43)),m.start(1),m.end(1),Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        while (m.find()) {
+            sb.setSpan(new StyleSpan(Typeface.BOLD), m.start(1), m.end(1), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            sb.setSpan(new ForegroundColorSpan(Color.rgb(33, 39, 43)), m.start(1), m.end(1), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         }
         m = p3.matcher(data);
-        while (m.find()){
-          sb.setSpan(new StyleSpan(Typeface.BOLD+Typeface.ITALIC),m.start(1), m.end(1), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        while (m.find()) {
+            sb.setSpan(new StyleSpan(Typeface.BOLD + Typeface.ITALIC), m.start(1), m.end(1), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         }
         final TextView textView = new TextView(getActivity());
         textView.setText(sb);

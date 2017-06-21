@@ -12,41 +12,40 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <com.pure.settings.preferences.SystemSettingSwitchPreference
+        android:defaultValue="false"
         android:key="toast_icon"
-        android:title="@string/toast_icon_title"
         android:summary="@string/toast_icon_summary"
-        android:defaultValue="false" />
+        android:title="@string/toast_icon_title" />
 
     <ListPreference
-         android:key="pref_scrollingcache"
-         android:dialogTitle="@string/pref_scrollingcache_title"
-         android:title="@string/pref_scrollingcache_title"
-         android:summary="@string/pref_scrollingcache_summary"
-         android:entries="@array/entries_scrollingcache"
-         android:entryValues="@array/values_scrollingcache" />
+        android:dialogTitle="@string/pref_scrollingcache_title"
+        android:entries="@array/entries_scrollingcache"
+        android:entryValues="@array/values_scrollingcache"
+        android:key="pref_scrollingcache"
+        android:summary="@string/pref_scrollingcache_summary"
+        android:title="@string/pref_scrollingcache_title" />
 
     <PreferenceCategory
         android:key="incall_vib_options"
-        android:title="@string/incall_vibration_category" >
+        android:title="@string/incall_vibration_category">
 
         <com.pure.settings.preferences.SystemSettingSwitchPreference
+            android:defaultValue="false"
             android:key="vibrate_on_connect"
-            android:title="@string/incall_vibrate_connect_title"
-            android:defaultValue="false" />
+            android:title="@string/incall_vibrate_connect_title" />
 
         <com.pure.settings.preferences.SystemSettingSwitchPreference
+            android:defaultValue="false"
             android:key="vibrate_on_callwaiting"
-            android:title="@string/incall_vibrate_call_wait_title"
-            android:defaultValue="false" />
+            android:title="@string/incall_vibrate_call_wait_title" />
 
         <com.pure.settings.preferences.SystemSettingSwitchPreference
+            android:defaultValue="false"
             android:key="vibrate_on_disconnect"
-            android:title="@string/incall_vibrate_disconnect_title"
-            android:defaultValue="false" />
+            android:title="@string/incall_vibrate_disconnect_title" />
 
     </PreferenceCategory>
 

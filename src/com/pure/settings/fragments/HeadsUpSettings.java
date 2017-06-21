@@ -27,17 +27,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
-import com.pure.settings.utils.Utils;
-
 import com.pure.settings.preferences.BaseSystemSettingSwitchBar;
+import com.pure.settings.utils.Utils;
 
 public class HeadsUpSettings extends SettingsPreferenceFragment
         implements BaseSystemSettingSwitchBar.SwitchBarChangeCallback,
-                Preference.OnPreferenceChangeListener {
+        Preference.OnPreferenceChangeListener {
 
     private static final String PREF_HEADS_UP_TIME_OUT = "heads_up_time_out";
     private static final String PREF_HEADS_UP_SNOOZE_TIME = "heads_up_snooze_time";
@@ -64,7 +62,7 @@ public class HeadsUpSettings extends SettingsPreferenceFragment
         }
 
         int defaultTimeOut = systemUiResources.getInteger(systemUiResources.getIdentifier(
-                    "com.android.systemui:integer/heads_up_notification_decay", null, null));
+                "com.android.systemui:integer/heads_up_notification_decay", null, null));
         mHeadsUpTimeOut = (ListPreference) findPreference(PREF_HEADS_UP_TIME_OUT);
         mHeadsUpTimeOut.setOnPreferenceChangeListener(this);
         int headsUpTimeOut = Settings.System.getInt(getContentResolver(),
@@ -73,7 +71,7 @@ public class HeadsUpSettings extends SettingsPreferenceFragment
         updateHeadsUpTimeOutSummary(headsUpTimeOut);
 
         int defaultSnooze = systemUiResources.getInteger(systemUiResources.getIdentifier(
-                    "com.android.systemui:integer/heads_up_default_snooze_length_ms", null, null));
+                "com.android.systemui:integer/heads_up_default_snooze_length_ms", null, null));
         mHeadsUpSnoozeTime = (ListPreference) findPreference(PREF_HEADS_UP_SNOOZE_TIME);
         mHeadsUpSnoozeTime.setOnPreferenceChangeListener(this);
         int headsUpSnooze = Settings.System.getInt(getContentResolver(),
@@ -84,7 +82,7 @@ public class HeadsUpSettings extends SettingsPreferenceFragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.headsup_fragment, container, false);
         mPrefsContainer = (ViewGroup) v.findViewById(R.id.prefs_container);
         mDisabledText = v.findViewById(R.id.disabled_text);
@@ -176,14 +174,14 @@ public class HeadsUpSettings extends SettingsPreferenceFragment
     }
 
     private boolean getUserHeadsUpState() {
-         return Settings.System.getIntForUser(getContentResolver(),
+        return Settings.System.getIntForUser(getContentResolver(),
                 Settings.System.HEADS_UP_USER_ENABLED,
                 Settings.System.HEADS_UP_USER_ON,
                 UserHandle.USER_CURRENT) != 0;
     }
 
     private void setUserHeadsUpState(int val) {
-         Settings.System.putIntForUser(getContentResolver(),
+        Settings.System.putIntForUser(getContentResolver(),
                 Settings.System.HEADS_UP_USER_ENABLED,
                 val, UserHandle.USER_CURRENT);
     }

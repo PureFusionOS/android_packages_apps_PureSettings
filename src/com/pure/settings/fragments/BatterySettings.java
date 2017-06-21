@@ -18,16 +18,14 @@ package com.pure.settings.fragments;
 import android.content.ContentResolver;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.support.v14.preference.SwitchPreference;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-
 import com.pure.settings.preferences.ColorPickerPreference;
 
 public class BatterySettings extends SettingsPreferenceFragment
@@ -102,7 +100,7 @@ public class BatterySettings extends SettingsPreferenceFragment
         mBatteryBarColor = (ColorPickerPreference) findPreference(PREF_BATT_BAR_COLOR);
         mBatteryBarColor.setOnPreferenceChangeListener(this);
         mBatteryBarColor.setSummary(mBatteryBarColor.getSummaryText() + ColorPickerPreference.convertToARGB(Settings.System.getInt(resolver,
-                     Settings.System.BATTERY_BAR_COLOR, mBatteryBarColor.getPrefDefault())));
+                Settings.System.BATTERY_BAR_COLOR, mBatteryBarColor.getPrefDefault())));
         mBatteryBarColor.setNewPreviewColor(Settings.System.getInt(resolver, Settings.System.BATTERY_BAR_COLOR, mBatteryBarColor.getPrefDefault()));
 
         mBatteryBarChargingAnimation = (SwitchPreference) findPreference(PREF_BATT_ANIMATE);
@@ -141,7 +139,7 @@ public class BatterySettings extends SettingsPreferenceFragment
         if (preference == mStatusBarBattery) {
             int batteryStyle = Integer.valueOf((String) objValue);
             int index = mStatusBarBattery.findIndexOfValue((String) objValue);
-           Settings.Secure.putInt(
+            Settings.Secure.putInt(
                     resolver, Settings.Secure.STATUS_BAR_BATTERY_STYLE, batteryStyle);
             mStatusBarBattery.setSummary(mStatusBarBattery.getEntries()[index]);
             enableStatusBarBatteryDependents(batteryStyle);
@@ -154,10 +152,10 @@ public class BatterySettings extends SettingsPreferenceFragment
             mStatusBarBatteryShowPercent.setSummary(
                     mStatusBarBatteryShowPercent.getEntries()[index]);
             return true;
-        } else if  (preference == mQsBatteryTitle) {
-            boolean checked = ((SwitchPreference)preference).isChecked();
+        } else if (preference == mQsBatteryTitle) {
+            boolean checked = ((SwitchPreference) preference).isChecked();
             Settings.Secure.putInt(resolver,
-                    Settings.Secure.STATUS_BAR_BATTERY_STYLE_TILE, checked ? 1:0);
+                    Settings.Secure.STATUS_BAR_BATTERY_STYLE_TILE, checked ? 1 : 0);
             return true;
         } else if (preference == mBatteryBarColor) {
             Settings.System.putInt(resolver, Settings.System.BATTERY_BAR_COLOR, (Integer) objValue);
@@ -201,7 +199,7 @@ public class BatterySettings extends SettingsPreferenceFragment
 
     private void updateBatteryBarOptions() {
         if (Settings.System.getInt(getActivity().getContentResolver(),
-            Settings.System.BATTERY_BAR_LOCATION, 0) == 0) {
+                Settings.System.BATTERY_BAR_LOCATION, 0) == 0) {
             mBatteryBarStyle.setEnabled(false);
             mBatteryBarThickness.setEnabled(false);
             mBatteryBarChargingAnimation.setEnabled(false);

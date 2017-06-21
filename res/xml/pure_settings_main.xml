@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2017 The Pure Nexus Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2017 The Pure Nexus Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,8 +13,7 @@
      limitations under the License.
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-        android:title="@string/pure_settings_title" >
+    android:title="@string/pure_settings_title">
 
     <PreferenceCategory
         android:key="pure_interface"
@@ -24,22 +22,22 @@
         <PreferenceScreen
             android:fragment="com.pure.settings.fragments.LockScreenSettings"
             android:key="pure_lockscreen_settings"
-            android:title="@string/lockscreen_settings_title"/>
+            android:title="@string/lockscreen_settings_title" />
 
         <PreferenceScreen
             android:fragment="com.pure.settings.fragments.NotificationDrawerSettings"
             android:key="pure_notification_drawer_settings"
-            android:title="@string/notification_drawer_settings_title"/>
+            android:title="@string/notification_drawer_settings_title" />
 
         <PreferenceScreen
             android:fragment="com.pure.settings.fragments.RecentSettings"
             android:key="pure_recent_settings"
-            android:title="@string/recent_settings_title"/>
+            android:title="@string/recent_settings_title" />
 
         <PreferenceScreen
             android:fragment="com.pure.settings.fragments.StatusBarSettings"
             android:key="pure_statusbar_settings"
-            android:title="@string/statusbar_settings_title"/>
+            android:title="@string/statusbar_settings_title" />
 
     </PreferenceCategory>
 
@@ -48,24 +46,24 @@
         android:title="@string/pure_buttons">
 
         <PreferenceScreen
+            android:fragment="com.pure.settings.fragments.HardwareKeysSettings"
             android:key="pure_hardware_keys_settings"
-            android:title="@string/hardware_keys_settings_title"
-            android:fragment="com.pure.settings.fragments.HardwareKeysSettings" />
+            android:title="@string/hardware_keys_settings_title" />
 
         <PreferenceScreen
             android:fragment="com.pure.settings.fragments.NavBarSettings"
             android:key="pure_navbar_settings"
-            android:title="@string/navbar_settings_title"/>
+            android:title="@string/navbar_settings_title" />
 
         <PreferenceScreen
             android:fragment="com.pure.settings.fragments.PowerMenuSettings"
             android:key="pure_powermenu_settings"
-            android:title="@string/powermenu_settings_title"/>
+            android:title="@string/powermenu_settings_title" />
 
         <PreferenceScreen
             android:fragment="com.pure.settings.fragments.VolumeRockerSettings"
             android:key="pure_volumerocker_settings"
-            android:title="@string/volumerocker_settings_title"/>
+            android:title="@string/volumerocker_settings_title" />
 
     </PreferenceCategory>
 
@@ -76,29 +74,30 @@
         <PreferenceScreen
             android:fragment="com.pure.settings.fragments.DisplaySettings"
             android:key="pure_display_settings"
-            android:title="@string/display_settings_title"/>
+            android:title="@string/display_settings_title" />
 
         <PreferenceScreen
             android:fragment="com.pure.settings.fragments.NotificationMediaSettings"
             android:key="pure_notification_media_settings"
-            android:title="@string/notification_media_settings_title"/>
+            android:title="@string/notification_media_settings_title" />
 
         <PreferenceScreen
             android:fragment="com.pure.settings.fragments.MiscSettings"
             android:key="pure_misc_settings"
-            android:title="@string/misc_settings_title"/>
+            android:title="@string/misc_settings_title" />
 
         <PreferenceScreen
             android:fragment="com.pure.settings.fragments.Changelog"
             android:key="pure_changelog"
-            android:title="@string/changelog_title"/>
+            android:title="@string/changelog_title" />
 
         <PreferenceScreen
             android:key="pure_ota"
             android:title="@string/ota_title">
-            <intent android:action="android.intent.action.MAIN"
-                    android:targetPackage="com.purenexus.ota"
-                    android:targetClass="com.purenexus.ota.UpdatesActivity" />
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetClass="com.purenexus.ota.UpdatesActivity"
+                android:targetPackage="com.purenexus.ota" />
         </PreferenceScreen>
 
     </PreferenceCategory>

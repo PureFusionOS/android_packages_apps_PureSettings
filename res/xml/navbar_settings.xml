@@ -17,77 +17,78 @@
 
     <PreferenceCategory
         android:key="navigation_bar"
-        android:title="@string/navigation_bar_opt_cat" >
+        android:title="@string/navigation_bar_opt_cat">
 
         <SwitchPreference
+            android:defaultValue="true"
             android:key="navbar_visibility"
-            android:title="@string/navbar_enable_bar"
-            android:defaultValue="true" />
+            android:title="@string/navbar_enable_bar" />
 
         <com.pure.settings.preferences.SystemSettingSwitchPreference
+            android:defaultValue="false"
+            android:dependency="navbar_visibility"
             android:key="nav_bar_dynamic"
-            android:title="@string/nav_bar_dynamic_title"
             android:summary="@string/nav_bar_dynamic_summary"
-            android:dependency="navbar_visibility"
-            android:defaultValue="false" />
+            android:title="@string/nav_bar_dynamic_title" />
 
         <com.pure.settings.preferences.SystemSettingSwitchPreference
+            android:defaultValue="true"
+            android:dependency="navbar_visibility"
             android:key="pixel_nav_animation"
-            android:title="@string/pixel_navbar_anim_title"
             android:summary="@string/pixel_navbar_anim_summary"
-            android:dependency="navbar_visibility"
-            android:defaultValue="true" />
+            android:title="@string/pixel_navbar_anim_title" />
 
         <com.pure.settings.preferences.SecureSettingSwitchPreference
-            android:key="one_handed_mode_ui"
-            android:title="@string/one_handed_mode_title"
-            android:summary="@string/one_handed_mode_summary"
+            android:defaultValue="false"
             android:dependency="navbar_visibility"
-            android:defaultValue="false" />
+            android:key="one_handed_mode_ui"
+            android:summary="@string/one_handed_mode_summary"
+            android:title="@string/one_handed_mode_title" />
 
         <com.pure.settings.preferences.SystemSettingSwitchPreference
-            android:key="double_tap_sleep_navbar"
-            android:title="@string/double_tap_sleep_nav_bar_title"
-            android:summary="@string/double_tap_sleep_nav_bar_summary"
+            android:defaultValue="false"
             android:dependency="navbar_visibility"
-            android:defaultValue="false" />
+            android:key="double_tap_sleep_navbar"
+            android:summary="@string/double_tap_sleep_nav_bar_summary"
+            android:title="@string/double_tap_sleep_nav_bar_title" />
 
         <com.pure.settings.preferences.SecureSettingSwitchPreference
-            android:key="kill_app_longpress_back"
-            android:title="@string/kill_app_longpress_back"
-            android:summary="@string/kill_app_longpress_back_summary"
+            android:defaultValue="false"
             android:dependency="navbar_visibility"
-            android:defaultValue="false" />
+            android:key="kill_app_longpress_back"
+            android:summary="@string/kill_app_longpress_back_summary"
+            android:title="@string/kill_app_longpress_back" />
 
         <com.pure.settings.preferences.CustomSeekBarPreference
+            android:dependency="kill_app_longpress_back"
             android:key="long_press_kill_delay"
-            android:title="@string/long_press_kill_delay"
             android:max="3000"
-            settings:min="250"
-            settings:interval="250"
-            settings:units="ms"
             android:persistent="false"
-            android:dependency="kill_app_longpress_back" />
+            android:title="@string/long_press_kill_delay"
+            settings:interval="250"
+            settings:min="250"
+            settings:units="ms" />
 
     </PreferenceCategory>
 
     <PreferenceCategory
         android:key="navigation_barc"
-        android:title="@string/navigation_bar_cus" >
+        android:title="@string/navigation_bar_cus">
 
         <PreferenceScreen
+            android:dependency="navbar_visibility"
             android:fragment="com.pure.settings.fragments.NavBarDimensSettings"
             android:key="navbar_dimens"
-            android:title="@string/navbar_dimensions_title"
-            android:dependency="navbar_visibility" />
+            android:title="@string/navbar_dimensions_title" />
 
         <PreferenceScreen
-            android:title="@string/navbar_tuner_title"
+            android:dependency="navbar_visibility"
             android:summary="@string/navbar_tuner_summary"
-            android:dependency="navbar_visibility" >
-            <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.systemui"
-                android:targetClass="com.android.systemui.tuner.NavbarActivity" />
+            android:title="@string/navbar_tuner_title">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetClass="com.android.systemui.tuner.NavbarActivity"
+                android:targetPackage="com.android.systemui" />
         </PreferenceScreen>
 
     </PreferenceCategory>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2017 The Pure Nexus Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2017 The Pure Nexus Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,31 +12,31 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
         android:key="media_cat"
-        android:title="@string/media_cat_title" >
+        android:title="@string/media_cat_title">
 
         <com.pure.settings.preferences.SystemSettingSwitchPreference
+            android:defaultValue="true"
             android:key="double_tap_vibrate"
-            android:title="@string/dbl_tap_vib_title"
             android:summary="@string/dbl_tap_vib_summary"
-            android:defaultValue="true" />
+            android:title="@string/dbl_tap_vib_title" />
 
-    </PreferenceCategory>	    
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="notif_cat"
-        android:title="@string/notif_cat_title" >
+        android:title="@string/notif_cat_title">
 
         <PreferenceScreen
-                android:title="@string/power_notification_title"
-                android:summary="@string/power_notification_summary">
-            <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.systemui"
-                android:targetClass="com.android.systemui.tuner.PowerNotificationControlsActivity" />
+            android:summary="@string/power_notification_summary"
+            android:title="@string/power_notification_title">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetClass="com.android.systemui.tuner.PowerNotificationControlsActivity"
+                android:targetPackage="com.android.systemui" />
         </PreferenceScreen>
 
         <PreferenceScreen
@@ -53,10 +52,10 @@
             android:title="@string/ticker_title" />
 
         <com.pure.settings.preferences.SystemSettingSwitchPreference
+            android:defaultValue="true"
             android:key="battery_low_notification"
-            android:title="@string/battery_low_notif_title"
             android:summary="@string/battery_low_notif_summary"
-            android:defaultValue="true" />
+            android:title="@string/battery_low_notif_title" />
 
     </PreferenceCategory>
 

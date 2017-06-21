@@ -16,25 +16,23 @@
 
 package com.pure.settings.fragments;
 
-import android.content.Context;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.res.Resources;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.pure.settings.utils.Utils;
 import com.pure.settings.preferences.SystemSettingSwitchPreference;
-
-import android.provider.Settings;
+import com.pure.settings.utils.Utils;
 
 public class LockScreenSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
@@ -74,12 +72,12 @@ public class LockScreenSettings extends SettingsPreferenceFragment implements
         mFingerprintManager = (FingerprintManager) getActivity().getSystemService(Context.FINGERPRINT_SERVICE);
         mFingerprintVib = (SystemSettingSwitchPreference) findPreference(FINGERPRINT_VIB);
         mFpKeystore = (SwitchPreference) findPreference(FP_UNLOCK_KEYSTORE);
-        if (!mFingerprintManager.isHardwareDetected()){
+        if (!mFingerprintManager.isHardwareDetected()) {
             secureCategory.removePreference(mFingerprintVib);
             secureCategory.removePreference(mFpKeystore);
-        }else{
+        } else {
             mFpKeystore.setChecked((Settings.System.getInt(getContentResolver(),
-                Settings.System.FP_UNLOCK_KEYSTORE, 0) == 1));
+                    Settings.System.FP_UNLOCK_KEYSTORE, 0) == 1));
             mFpKeystore.setOnPreferenceChangeListener(this);
         }
 
@@ -87,9 +85,9 @@ public class LockScreenSettings extends SettingsPreferenceFragment implements
         if (!resources.getBoolean(R.bool.showCharging)) {
             prefScreen.removePreference(mLockscreenCharging);
         } else {
-        mLockscreenCharging.setChecked((Settings.System.getInt(getContentResolver(),
-                Settings.System.LOCKSCREEN_BATTERY_INFO, 0) == 1));
-        mLockscreenCharging.setOnPreferenceChangeListener(this);
+            mLockscreenCharging.setChecked((Settings.System.getInt(getContentResolver(),
+                    Settings.System.LOCKSCREEN_BATTERY_INFO, 0) == 1));
+            mLockscreenCharging.setOnPreferenceChangeListener(this);
         }
     }
 

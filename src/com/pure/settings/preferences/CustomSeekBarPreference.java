@@ -18,22 +18,21 @@ package com.pure.settings.preferences;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.v7.preference.*;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.ViewParent;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.support.v7.preference.*;
 
 import com.android.settings.R;
 
 public class CustomSeekBarPreference extends Preference implements SeekBar.OnSeekBarChangeListener {
-    private final String TAG = getClass().getName();
     private static final String SETTINGS_NS = "http://schemas.android.com/apk/res/com.android.settings";
     private static final String ANDROIDNS = "http://schemas.android.com/apk/res/android";
     private static final int DEFAULT_VALUE = 50;
-
+    private final String TAG = getClass().getName();
     private int mMin = 0;
     private int mInterval = 1;
     private int mCurrentValue;
@@ -45,7 +44,7 @@ public class CustomSeekBarPreference extends Preference implements SeekBar.OnSee
     private TextView mStatusText;
 
     public CustomSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr,
-            int defStyleRes) {
+                                   int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         final TypedArray a = context.obtainStyledAttributes(
                 attrs, R.styleable.CustomSeekBarPreference);
@@ -88,7 +87,7 @@ public class CustomSeekBarPreference extends Preference implements SeekBar.OnSee
     }
 
     private String getAttributeStringValue(AttributeSet attrs, String namespace, String name,
-            String defaultValue) {
+                                           String defaultValue) {
         String value = attrs.getAttributeValue(namespace, name);
         if (value == null)
             value = defaultValue;
@@ -111,8 +110,7 @@ public class CustomSeekBarPreference extends Preference implements SeekBar.OnSee
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
-        try
-        {
+        try {
             // move our seekbar to the new view we've been given
             ViewParent oldContainer = mSeekBar.getParent();
             ViewGroup newContainer = (ViewGroup) view.findViewById(R.id.seekBarPrefBarContainer);
@@ -195,8 +193,7 @@ public class CustomSeekBarPreference extends Preference implements SeekBar.OnSee
     protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
         if (restoreValue) {
             mCurrentValue = getPersistedInt(mCurrentValue);
-        }
-        else {
+        } else {
             int temp = 0;
             try {
                 temp = (Integer) defaultValue;

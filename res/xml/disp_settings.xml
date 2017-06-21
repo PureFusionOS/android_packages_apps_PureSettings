@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2017 The Pure Nexus Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2017 The Pure Nexus Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,45 +12,44 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
         android:key="disp"
-        android:title="@string/display_category" >
+        android:title="@string/display_category">
 
         <PreferenceScreen
+            android:fragment="com.android.settings.applications.ExpandedDesktopPreferenceFragment"
             android:key="expanded_desktop"
-            android:title="@string/power_menu_expanded_desktop"
-            android:fragment="com.android.settings.applications.ExpandedDesktopPreferenceFragment" />
+            android:title="@string/power_menu_expanded_desktop" />
 
         <com.pure.settings.preferences.GlobalSettingSwitchPreference
+            android:defaultValue="false"
             android:key="wake_when_plugged_or_unplugged"
-            android:title="@string/wake_when_plugged_or_unplugged_title"
             android:summary="@string/wake_when_plugged_or_unplugged_summary"
-            android:defaultValue="false" />
+            android:title="@string/wake_when_plugged_or_unplugged_title" />
 
         <com.pure.settings.preferences.SystemSettingSwitchPreference
+            android:defaultValue="false"
             android:key="three_finger_gesture"
-            android:title="@string/three_finger_gesture"
             android:summary="@string/three_finger_gesture_summary"
-            android:defaultValue="false" />
+            android:title="@string/three_finger_gesture" />
 
     </PreferenceCategory>
 
     <PreferenceCategory
         android:key="leds"
-        android:title="@string/led_category" >
+        android:title="@string/led_category">
 
         <PreferenceScreen
+            android:fragment="com.pure.settings.notificationlight.NotificationLightSettings"
             android:key="notification_light"
-            android:title="@string/notification_light_title"
-            android:fragment="com.pure.settings.notificationlight.NotificationLightSettings" />
+            android:title="@string/notification_light_title" />
 
         <PreferenceScreen
+            android:fragment="com.pure.settings.notificationlight.BatteryLightSettings"
             android:key="battery_light"
-            android:title="@string/battery_light_title"
-            android:fragment="com.pure.settings.notificationlight.BatteryLightSettings" />
+            android:title="@string/battery_light_title" />
 
     </PreferenceCategory>
 

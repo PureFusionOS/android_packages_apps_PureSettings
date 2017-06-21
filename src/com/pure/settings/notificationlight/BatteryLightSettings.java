@@ -29,7 +29,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.pure.settings.preferences.SystemSettingSwitchPreference;
@@ -46,7 +45,7 @@ public class BatteryLightSettings extends SettingsPreferenceFragment implements
     private static final String REALLY_FULL_COLOR_PREF = "really_full_color";
     private static final String LIGHT_ENABLED_PREF = "battery_light_enabled";
     private static final String PULSE_ENABLED_PREF = "battery_light_pulse";
-
+    private static final int MENU_RESET = Menu.FIRST;
     private PreferenceGroup mColorPrefs;
     private ApplicationLightPreference mLowColorPref;
     private ApplicationLightPreference mMediumColorPref;
@@ -54,8 +53,6 @@ public class BatteryLightSettings extends SettingsPreferenceFragment implements
     private ApplicationLightPreference mReallyFullColorPref;
     private SystemSettingSwitchPreference mLightEnabledPref;
     private SystemSettingSwitchPreference mPulseEnabledPref;
-
-    private static final int MENU_RESET = Menu.FIRST;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -136,7 +133,7 @@ public class BatteryLightSettings extends SettingsPreferenceFragment implements
     /**
      * Updates the default or application specific notification settings.
      *
-     * @param key of the specific setting to update
+     * @param key   of the specific setting to update
      * @param color
      */
     protected void updateValues(String key, Integer color) {

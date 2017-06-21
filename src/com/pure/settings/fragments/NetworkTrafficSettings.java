@@ -21,21 +21,19 @@ import android.content.res.Resources;
 import android.net.TrafficStats;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
-import android.support.v14.preference.SwitchPreference;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-
 import com.pure.settings.preferences.CustomSeekBarPreference;
 
 public class NetworkTrafficSettings extends SettingsPreferenceFragment
-            implements OnPreferenceChangeListener  {
+        implements OnPreferenceChangeListener {
 
     private static final String TAG = "NetworkTrafficSettings";
 
@@ -73,13 +71,13 @@ public class NetworkTrafficSettings extends SettingsPreferenceFragment
         mNetTrafficPeriod = (ListPreference) prefSet.findPreference(NETWORK_TRAFFIC_PERIOD);
 
         mNetTrafficHidearrow =
-            (SwitchPreference) prefSet.findPreference(NETWORK_TRAFFIC_HIDEARROW);
+                (SwitchPreference) prefSet.findPreference(NETWORK_TRAFFIC_HIDEARROW);
         mNetTrafficHidearrow.setChecked((Settings.System.getInt(resolver,
                 Settings.System.NETWORK_TRAFFIC_HIDEARROW, 0) == 1));
         mNetTrafficHidearrow.setOnPreferenceChangeListener(this);
 
         mNetTrafficAutohide =
-            (SwitchPreference) prefSet.findPreference(NETWORK_TRAFFIC_AUTOHIDE);
+                (SwitchPreference) prefSet.findPreference(NETWORK_TRAFFIC_AUTOHIDE);
         mNetTrafficAutohide.setChecked((Settings.System.getInt(resolver,
                 Settings.System.NETWORK_TRAFFIC_AUTOHIDE, 0) == 1));
         mNetTrafficAutohide.setOnPreferenceChangeListener(this);
@@ -142,7 +140,7 @@ public class NetworkTrafficSettings extends SettingsPreferenceFragment
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mNetTrafficState) {
-            int intState = Integer.valueOf((String)newValue);
+            int intState = Integer.valueOf((String) newValue);
             mNetTrafficVal = setBit(mNetTrafficVal, MASK_UP, getBit(intState, MASK_UP));
             mNetTrafficVal = setBit(mNetTrafficVal, MASK_DOWN, getBit(intState, MASK_DOWN));
             Settings.System.putInt(getActivity().getContentResolver(),
@@ -152,14 +150,14 @@ public class NetworkTrafficSettings extends SettingsPreferenceFragment
             updateNetworkTrafficState(index);
             return true;
         } else if (preference == mNetTrafficUnit) {
-            mNetTrafficVal = setBit(mNetTrafficVal, MASK_UNIT, ((String)newValue).equals("1"));
+            mNetTrafficVal = setBit(mNetTrafficVal, MASK_UNIT, newValue.equals("1"));
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.NETWORK_TRAFFIC_STATE, mNetTrafficVal);
             int index = mNetTrafficUnit.findIndexOfValue((String) newValue);
             mNetTrafficUnit.setSummary(mNetTrafficUnit.getEntries()[index]);
             return true;
         } else if (preference == mNetTrafficPeriod) {
-            int intState = Integer.valueOf((String)newValue);
+            int intState = Integer.valueOf((String) newValue);
             mNetTrafficVal = setBit(mNetTrafficVal, MASK_PERIOD, false) + (intState << 16);
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.NETWORK_TRAFFIC_STATE, mNetTrafficVal);

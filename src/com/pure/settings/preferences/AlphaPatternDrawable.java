@@ -84,8 +84,8 @@ public class AlphaPatternDrawable extends Drawable {
     }
 
     // Generates bitmap cache with pattern as big as allowed to avoid recreating on draw()
-    private void generatePatternBitmap(){
-        if(getBounds().width() <= 0 || getBounds().height() <= 0){
+    private void generatePatternBitmap() {
+        if (getBounds().width() <= 0 || getBounds().height() <= 0) {
             return;
         }
 

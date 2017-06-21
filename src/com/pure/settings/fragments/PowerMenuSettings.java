@@ -23,31 +23,29 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
-import android.support.v14.preference.SwitchPreference;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-
+import com.android.internal.util.purenexus.PowerMenuConstants;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-
 import com.pure.settings.utils.Utils;
-import com.pure.settings.preferences.SystemSettingSwitchPreference;
 
-import com.android.internal.util.purenexus.PowerMenuConstants;
-import static com.android.internal.util.purenexus.PowerMenuConstants.*;
-
-
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static com.android.internal.util.purenexus.PowerMenuConstants.*;
 
 public class PowerMenuSettings extends SettingsPreferenceFragment {
 
     private static final String ACTION_CATEGORY = "action_category";
     private static final String POWER_CATEGORY = "power_category";
+    private static final int MY_USER_ID = UserHandle.myUserId();
+    Context mContext;
     // power items
     private SwitchPreference mRebootPref;
     private SwitchPreference mScreenshotPref;
@@ -61,13 +59,9 @@ public class PowerMenuSettings extends SettingsPreferenceFragment {
     private SwitchPreference mVoicePref;
     private SwitchPreference mBugReportPref;
     private SwitchPreference mSilentPref;
-
-    Context mContext;
     private ArrayList<String> mLocalUserConfig = new ArrayList<String>();
     private String[] mAvailableActions;
     private String[] mAllActions;
-
-    private static final int MY_USER_ID = UserHandle.myUserId();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,7 +76,7 @@ public class PowerMenuSettings extends SettingsPreferenceFragment {
         final PreferenceCategory powerCategory =
                 (PreferenceCategory) prefScreen.findPreference(POWER_CATEGORY);
 
-		// power items
+        // power items
         mAvailableActions = getActivity().getResources().getStringArray(
                 R.array.power_menu_actions_array);
         mAllActions = PowerMenuConstants.getAllActions();
@@ -112,8 +106,8 @@ public class PowerMenuSettings extends SettingsPreferenceFragment {
                 mLockdownPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_LOCKDOWN);
             } else if (action.equals(GLOBAL_ACTION_KEY_ASSIST)) {
                 mAssistPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_ASSIST);
-            } else if (action.equals(GLOBAL_ACTION_KEY_VOICEASSIST )) {
-                mVoicePref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_VOICEASSIST );
+            } else if (action.equals(GLOBAL_ACTION_KEY_VOICEASSIST)) {
+                mVoicePref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_VOICEASSIST);
             } else if (action.equals(GLOBAL_ACTION_KEY_BUGREPORT)) {
                 mBugReportPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_BUGREPORT);
             } else if (action.equals(GLOBAL_ACTION_KEY_SILENT)) {
@@ -271,10 +265,7 @@ public class PowerMenuSettings extends SettingsPreferenceFragment {
     }
 
     private boolean isActionAllowed(String action) {
-        if (Arrays.asList(mAvailableActions).contains(action)) {
-            return true;
-        }
-        return false;
+        return Arrays.asList(mAvailableActions).contains(action);
     }
 
     private void updateUserConfig(boolean enabled, String action) {
@@ -292,7 +283,7 @@ public class PowerMenuSettings extends SettingsPreferenceFragment {
 
     private void updatePreferences() {
         boolean bugreport = Settings.Secure.getInt(getContentResolver(),
-            Settings.Secure.BUGREPORT_IN_POWER_MENU, 0) != 0;
+                Settings.Secure.BUGREPORT_IN_POWER_MENU, 0) != 0;
 
         if (mBugReportPref != null) {
             mBugReportPref.setEnabled(bugreport);
@@ -308,7 +299,7 @@ public class PowerMenuSettings extends SettingsPreferenceFragment {
         mLocalUserConfig.clear();
         String[] defaultActions;
         String savedActions = Settings.Global.getStringForUser(mContext.getContentResolver(),
-            Settings.Global.POWER_MENU_ACTIONS, UserHandle.USER_CURRENT);
+                Settings.Global.POWER_MENU_ACTIONS, UserHandle.USER_CURRENT);
 
         if (savedActions == null) {
             defaultActions = mContext.getResources().getStringArray(
@@ -344,7 +335,7 @@ public class PowerMenuSettings extends SettingsPreferenceFragment {
         }
 
         Settings.Global.putStringForUser(getContentResolver(),
-            Settings.Global.POWER_MENU_ACTIONS, s.toString(), UserHandle.USER_CURRENT);
+                Settings.Global.POWER_MENU_ACTIONS, s.toString(), UserHandle.USER_CURRENT);
         updatePowerMenuDialog();
     }
 

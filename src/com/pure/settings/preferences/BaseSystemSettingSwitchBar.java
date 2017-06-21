@@ -23,23 +23,18 @@ import android.net.Uri;
 import android.os.Handler;
 import android.provider.Settings;
 import android.widget.Switch;
+
 import com.android.settings.widget.SwitchBar;
 
-public class BaseSystemSettingSwitchBar implements SwitchBar.OnSwitchChangeListener  {
+public class BaseSystemSettingSwitchBar implements SwitchBar.OnSwitchChangeListener {
+    private final String mSettingKey;
+    private final int mDefaultState;
+    private final SwitchBarChangeCallback mCallback;
     private Context mContext;
     private SwitchBar mSwitchBar;
     private SettingsObserver mSettingsObserver;
     private boolean mListeningToOnSwitchChange = false;
-
     private boolean mStateMachineEvent;
-
-    private final String mSettingKey;
-    private final int mDefaultState;
-
-    private final SwitchBarChangeCallback mCallback;
-    public interface SwitchBarChangeCallback {
-        public void onEnablerChanged(boolean isEnabled);
-    }
 
     public BaseSystemSettingSwitchBar(Context context, SwitchBar switchBar, String key,
                                       boolean defaultState, SwitchBarChangeCallback callback) {
@@ -119,6 +114,10 @@ public class BaseSystemSettingSwitchBar implements SwitchBar.OnSwitchChangeListe
         if (mCallback != null) {
             mCallback.onEnablerChanged(isChecked);
         }
+    }
+
+    public interface SwitchBarChangeCallback {
+        void onEnablerChanged(boolean isEnabled);
     }
 
     class SettingsObserver extends ContentObserver {

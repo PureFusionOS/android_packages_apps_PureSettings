@@ -19,20 +19,6 @@
 
 package com.pure.settings.fragments;
 
-import java.util.ArrayList;
-
-import com.android.internal.logging.MetricsLogger;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.internal.utils.du.ActionConstants.Defaults;
-import com.android.internal.utils.du.ActionHandler;
-import com.android.internal.utils.du.Config;
-import com.android.internal.utils.du.Config.ActionConfig;
-import com.android.internal.utils.du.Config.ButtonConfig;
-
-import com.pure.settings.ShortcutPickHelper;
-import com.pure.settings.preferences.ActionPreference;
-import com.pure.settings.CustomActionListAdapter;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -42,8 +28,19 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.utils.du.ActionConstants.Defaults;
+import com.android.internal.utils.du.ActionHandler;
+import com.android.internal.utils.du.Config;
+import com.android.internal.utils.du.Config.ActionConfig;
+import com.android.internal.utils.du.Config.ButtonConfig;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.pure.settings.CustomActionListAdapter;
+import com.pure.settings.ShortcutPickHelper;
+import com.pure.settings.preferences.ActionPreference;
+
+import java.util.ArrayList;
 
 public class ActionFragment extends SettingsPreferenceFragment implements
         ShortcutPickHelper.OnPickListener {
@@ -51,9 +48,8 @@ public class ActionFragment extends SettingsPreferenceFragment implements
     private static final int DIALOG_CATEGORY = 69;
     private static final int DIALOG_CUSTOM_ACTIONS = 70;
     private static final String KEY_FOCUSED_PREFERENCE = "key_focused_preference";
-
-    private ShortcutPickHelper mPicker;
     protected ArrayList<ActionPreference> mPrefHolder;
+    private ShortcutPickHelper mPicker;
     private String mHolderTag;
     private Defaults mDefaults;
     private ArrayList<ButtonConfig> mButtons;
@@ -91,7 +87,7 @@ public class ActionFragment extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         if (preference instanceof ActionPreference) {
-            mHolderTag = ((ActionPreference)preference).getTag();
+            mHolderTag = ((ActionPreference) preference).getTag();
             showDialog(DIALOG_CATEGORY);
             return true;
         }

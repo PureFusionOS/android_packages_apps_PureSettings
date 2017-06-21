@@ -40,17 +40,15 @@ import java.util.List;
 import java.util.TreeSet;
 
 public class PackageListAdapter extends BaseAdapter implements Runnable {
+    // Packages which don't have launcher icons, but which we want to show nevertheless
+    private static final String[] PACKAGE_WHITELIST = new String[]{
+            "android",                          /* system server */
+            "com.android.systemui",             /* system UI */
+            "com.android.providers.downloads"   /* download provider */
+    };
     private PackageManager mPm;
     private LayoutInflater mInflater;
     private List<PackageItem> mInstalledPackages = new LinkedList<PackageItem>();
-
-    // Packages which don't have launcher icons, but which we want to show nevertheless
-    private static final String[] PACKAGE_WHITELIST = new String[] {
-        "android",                          /* system server */
-        "com.android.systemui",             /* system UI */
-        "com.android.providers.downloads"   /* download provider */
-    };
-
     private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -64,25 +62,6 @@ public class PackageListAdapter extends BaseAdapter implements Runnable {
             notifyDataSetChanged();
         }
     };
-
-    public static class PackageItem implements Comparable<PackageItem> {
-        public final String packageName;
-        public final CharSequence title;
-        private final TreeSet<CharSequence> activityTitles = new TreeSet<CharSequence>();
-        public final Drawable icon;
-
-        PackageItem(String packageName, CharSequence title, Drawable icon) {
-            this.packageName = packageName;
-            this.title = title;
-            this.icon = icon;
-        }
-
-        @Override
-        public int compareTo(PackageItem another) {
-            int result = title.toString().compareToIgnoreCase(another.title.toString());
-            return result != 0 ? result : packageName.compareTo(another.packageName);
-        }
-    }
 
     public PackageListAdapter(Context context) {
         mPm = context.getPackageManager();
@@ -175,6 +154,25 @@ public class PackageListAdapter extends BaseAdapter implements Runnable {
             } catch (PackageManager.NameNotFoundException ignored) {
                 // package not present, so nothing to add -> ignore it
             }
+        }
+    }
+
+    public static class PackageItem implements Comparable<PackageItem> {
+        public final String packageName;
+        public final CharSequence title;
+        public final Drawable icon;
+        private final TreeSet<CharSequence> activityTitles = new TreeSet<CharSequence>();
+
+        PackageItem(String packageName, CharSequence title, Drawable icon) {
+            this.packageName = packageName;
+            this.title = title;
+            this.icon = icon;
+        }
+
+        @Override
+        public int compareTo(PackageItem another) {
+            int result = title.toString().compareToIgnoreCase(another.title.toString());
+            return result != 0 ? result : packageName.compareTo(another.packageName);
         }
     }
 

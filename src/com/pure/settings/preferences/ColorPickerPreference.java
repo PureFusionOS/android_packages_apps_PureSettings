@@ -43,6 +43,7 @@ import java.util.Locale;
 
 public class ColorPickerPreference extends Preference implements OnPreferenceClickListener, OnColorChangedListener {
 
+    private static final String androidns = "http://schemas.android.com/apk/res/android";
     PreferenceViewHolder mView;
     ColorPickerDialog mDialog;
     LinearLayout widgetFrameView;
@@ -51,8 +52,6 @@ public class ColorPickerPreference extends Preference implements OnPreferenceCli
     private boolean mAlphaSliderEnabled = false;
     private boolean mAlphaSliderText = false;
     private boolean mPrefEnabled = true;
-
-    private static final String androidns = "http://schemas.android.com/apk/res/android";
     private String mKey;
     private String mSummary;
     private String mTitle;
@@ -72,6 +71,65 @@ public class ColorPickerPreference extends Preference implements OnPreferenceCli
     public ColorPickerPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(context, attrs);
+    }
+
+    // For custom purposes. Not used by ColorPickerPreferrence
+    public static String convertToARGB(int color) {
+        String alpha = Integer.toHexString(Color.alpha(color));
+        String red = Integer.toHexString(Color.red(color));
+        String green = Integer.toHexString(Color.green(color));
+        String blue = Integer.toHexString(Color.blue(color));
+
+        if (alpha.length() == 1) {
+            alpha = "0" + alpha;
+        }
+
+        if (red.length() == 1) {
+            red = "0" + red;
+        }
+
+        if (green.length() == 1) {
+            green = "0" + green;
+        }
+
+        if (blue.length() == 1) {
+            blue = "0" + blue;
+        }
+
+        return ("#" + alpha + red + green + blue).toUpperCase(Locale.getDefault());
+    }
+
+    // For custom purposes. Not used by ColorPickerPreferrence
+    public static int convertToColorInt(String argb) throws NumberFormatException {
+        if (TextUtils.isEmpty(argb)) {
+            return Color.BLACK;
+        }
+
+        if (argb.startsWith("#")) {
+            argb = argb.replace("#", "");
+        }
+
+        if (argb.startsWith("0x")) {
+            argb = argb.replace("0x", "");
+        }
+
+        int alpha, red, green, blue;
+
+        if (argb.length() == 8) {
+            alpha = Integer.parseInt(argb.substring(0, 2), 16);
+            red = Integer.parseInt(argb.substring(2, 4), 16);
+            green = Integer.parseInt(argb.substring(4, 6), 16);
+            blue = Integer.parseInt(argb.substring(6, 8), 16);
+        } else if (argb.length() == 6) {
+            alpha = 255;
+            red = Integer.parseInt(argb.substring(0, 2), 16);
+            green = Integer.parseInt(argb.substring(2, 4), 16);
+            blue = Integer.parseInt(argb.substring(4, 6), 16);
+        } else {
+            return Color.BLACK;
+        }
+
+        return Color.argb(alpha, red, green, blue);
     }
 
     @Override
@@ -117,7 +175,7 @@ public class ColorPickerPreference extends Preference implements OnPreferenceCli
             }
 
             mDefault = convertToColorInt(attrs.getAttributeValue(androidns, "defaultValue"));
-			a.recycle();
+            a.recycle();
         }
     }
 
@@ -204,6 +262,11 @@ public class ColorPickerPreference extends Preference implements OnPreferenceCli
         return mSpecialFlag;
     }
 
+    // Sets up some preference specific stuff like colorgroupname
+    public void setPrefFlag(String specialflag) {
+        mSpecialFlag = specialflag;
+    }
+
     public String getSummaryText() {
         return ((getContext().getResources().getBoolean(R.bool.showFullColorPickSummary)) && !TextUtils.isEmpty(mSummary)) ? mSummary + " - " : "";
     }
@@ -259,11 +322,6 @@ public class ColorPickerPreference extends Preference implements OnPreferenceCli
         onColorChanged(color);
     }
 
-    // Sets up some preference specific stuff like colorgroupname
-    public void setPrefFlag(String specialflag) {
-        mSpecialFlag = specialflag;
-    }
-
     // For custom purposes. Not used by ColorPickerPreferrence
     public void setNewPreviewColor(int color) {
         onColorChanged(color);
@@ -272,60 +330,5 @@ public class ColorPickerPreference extends Preference implements OnPreferenceCli
     public void setPreviewDim(boolean enable) {
         mPrefEnabled = enable;
         setPreviewColor(mPrefEnabled);
-    }
-
-    // For custom purposes. Not used by ColorPickerPreferrence
-    public static String convertToARGB(int color) {
-        String alpha = Integer.toHexString(Color.alpha(color));
-        String red = Integer.toHexString(Color.red(color));
-        String green = Integer.toHexString(Color.green(color));
-        String blue = Integer.toHexString(Color.blue(color));
-
-        if (alpha.length() == 1) {
-            alpha = "0" + alpha;
-        }
-
-        if (red.length() == 1) {
-            red = "0" + red;
-        }
-
-        if (green.length() == 1) {
-            green = "0" + green;
-        }
-
-        if (blue.length() == 1) {
-            blue = "0" + blue;
-        }
-
-        return ("#" + alpha + red + green + blue).toUpperCase(Locale.getDefault());
-    }
-
-    // For custom purposes. Not used by ColorPickerPreferrence
-    public static int convertToColorInt(String argb) throws NumberFormatException {
-        if (TextUtils.isEmpty(argb)) { return Color.BLACK; }
-
-        if (argb.startsWith("#")) {
-            argb = argb.replace("#", "");
-        }
-
-        if (argb.startsWith("0x")) {
-            argb = argb.replace("0x", "");
-        }
-
-        int alpha, red, green, blue;
-
-        if (argb.length() == 8) {
-            alpha = Integer.parseInt(argb.substring(0, 2), 16);
-            red = Integer.parseInt(argb.substring(2, 4), 16);
-            green = Integer.parseInt(argb.substring(4, 6), 16);
-            blue = Integer.parseInt(argb.substring(6, 8), 16);
-        } else if (argb.length() == 6) {
-            alpha = 255;
-            red = Integer.parseInt(argb.substring(0, 2), 16);
-            green = Integer.parseInt(argb.substring(2, 4), 16);
-            blue = Integer.parseInt(argb.substring(4, 6), 16);
-        } else { return Color.BLACK; }
-
-        return Color.argb(alpha, red, green, blue);
     }
 }

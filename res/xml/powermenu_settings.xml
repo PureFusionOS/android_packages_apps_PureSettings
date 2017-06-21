@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2017 The Pure Nexus Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2017 The Pure Nexus Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,83 +12,82 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
         android:key="power_category"
-        android:title="@string/power_category" >
+        android:title="@string/power_category">
 
         <com.pure.settings.preferences.SystemSettingSwitchPreference
+            android:defaultValue="true"
             android:key="lockscreen_enable_power_menu"
-            android:title="@string/lockscreen_enable_power_menu_title"
-            android:defaultValue="true" />
+            android:title="@string/lockscreen_enable_power_menu_title" />
 
     </PreferenceCategory>
 
     <PreferenceCategory
         android:key="action_category"
-        android:title="@string/actions_category" >
+        android:title="@string/actions_category">
 
         <SwitchPreference
+            android:defaultValue="true"
             android:key="reboot"
-            android:title="@string/power_menu_reboot_title"
-            android:defaultValue="true" />
+            android:title="@string/power_menu_reboot_title" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="screenshot"
-            android:title="@string/power_menu_screenshot_title"
-            android:defaultValue="false" />
+            android:title="@string/power_menu_screenshot_title" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="screenrecord"
-            android:title="@string/power_menu_screenrecord_title"
-            android:defaultValue="false" />
+            android:title="@string/power_menu_screenrecord_title" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="torch"
-            android:title="@string/power_menu_torch_title"
-            android:defaultValue="false" />
+            android:title="@string/power_menu_torch_title" />
 
         <SwitchPreference
+            android:defaultValue="true"
             android:key="airplane"
-            android:title="@string/power_menu_airplane_title"
-            android:defaultValue="true" />
+            android:title="@string/power_menu_airplane_title" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="users"
-            android:title="@string/power_menu_users_title"
-            android:defaultValue="false" />
+            android:title="@string/power_menu_users_title" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="settings"
-            android:title="@string/power_menu_settings_title"
-            android:defaultValue="false" />
+            android:title="@string/power_menu_settings_title" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="lockdown"
-            android:title="@string/power_menu_lockdown_title"
-            android:defaultValue="false" />
+            android:title="@string/power_menu_lockdown_title" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="assist"
-            android:title="@string/power_menu_search_title"
-            android:defaultValue="false" />
+            android:title="@string/power_menu_search_title" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="voiceassist"
-            android:title="@string/power_menu_voice_title"
-            android:defaultValue="false" />
+            android:title="@string/power_menu_voice_title" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="bugreport"
-            android:title="@string/power_menu_bug_report_title"
-            android:defaultValue="false" />
+            android:title="@string/power_menu_bug_report_title" />
 
         <SwitchPreference
+            android:defaultValue="true"
             android:key="silent"
-            android:title="@string/power_menu_sound_title"
-            android:defaultValue="true" />
+            android:title="@string/power_menu_sound_title" />
 
     </PreferenceCategory>
 

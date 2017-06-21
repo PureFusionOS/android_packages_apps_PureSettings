@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2017 The Pure Nexus Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2017 The Pure Nexus Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -498,7 +497,7 @@
     <string name="action_value_menu" translatable="false">task_menu</string>
 
     <!-- Hardware button navigation -->
-    <string name="hardware_keys_settings_title">Hardware Keys</string> 
+    <string name="hardware_keys_settings_title">Hardware Keys</string>
     <string name="hardware_keys_home_key_title">Home button</string>
     <string name="hardware_keys_menu_key_title">Menu button</string>
     <string name="hardware_keys_assist_key_title">Search button</string>

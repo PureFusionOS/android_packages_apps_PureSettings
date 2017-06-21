@@ -16,11 +16,6 @@
 
 package com.pure.settings.fragments;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
@@ -30,13 +25,16 @@ import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class VolumeStepsSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
@@ -47,6 +45,9 @@ public class VolumeStepsSettings extends SettingsPreferenceFragment implements
 
     // base map of all preference keys and the associated stream
     private static final Map<String, Integer> volume_map = new HashMap<String, Integer>();
+    // entries to remove on non-telephony devices
+    private static final Set<String> telephony_set = new HashSet<String>();
+
     static {
         volume_map.put("volume_steps_alarm", new Integer(AudioManager.STREAM_ALARM));
         volume_map.put("volume_steps_dtmf", new Integer(AudioManager.STREAM_DTMF));
@@ -57,8 +58,6 @@ public class VolumeStepsSettings extends SettingsPreferenceFragment implements
         volume_map.put("volume_steps_voice_call", new Integer(AudioManager.STREAM_VOICE_CALL));
     }
 
-    // entries to remove on non-telephony devices
-    private static final Set<String> telephony_set = new HashSet<String>();
     static {
         telephony_set.add("volume_steps_dtmf");
         telephony_set.add("volume_steps_ring");

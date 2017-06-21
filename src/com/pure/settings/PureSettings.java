@@ -18,15 +18,11 @@ package com.pure.settings;
 
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceScreen;
-import android.content.res.Resources;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-
 import com.android.settings.SettingsPreferenceFragment;
 
 public class PureSettings extends SettingsPreferenceFragment {
-
-    private static final String CATEGORY_HWKEY = "pure_hardware_keys_settings";
 
     // Masks for checking presence of hardware keys.
     // Must match values in frameworks/base/core/res/res/values/config.xml
@@ -37,6 +33,7 @@ public class PureSettings extends SettingsPreferenceFragment {
     public static final int KEY_MASK_APP_SWITCH = 0x10;
     public static final int KEY_MASK_CAMERA = 0x20;
     public static final int KEY_MASK_VOLUME = 0x40;
+    private static final String CATEGORY_HWKEY = "pure_hardware_keys_settings";
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -44,7 +41,7 @@ public class PureSettings extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.pure_settings_main);
         PreferenceScreen prefScreen = getPreferenceScreen();
         final PreferenceScreen hwkeyCat = (PreferenceScreen) prefScreen.findPreference(CATEGORY_HWKEY);
-        
+
         // bits for hardware keys present on device
         final int deviceKeys = getResources().getInteger(
                 com.android.internal.R.integer.config_deviceHardwareKeys);

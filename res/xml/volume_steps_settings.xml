@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2017 The Pure Nexus Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2017 The Pure Nexus Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,49 +12,48 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ListPreference
+        android:entries="@array/volume_steps_entries"
+        android:entryValues="@array/volume_steps_entries"
         android:key="volume_steps_alarm"
-        android:title="@string/volume_steps_alarm_title"
-        android:entries="@array/volume_steps_entries"
-        android:entryValues="@array/volume_steps_entries" />
+        android:title="@string/volume_steps_alarm_title" />
 
     <ListPreference
+        android:entries="@array/volume_steps_entries"
+        android:entryValues="@array/volume_steps_entries"
         android:key="volume_steps_dtmf"
-        android:title="@string/volume_steps_dtmf_title"
-        android:entries="@array/volume_steps_entries"
-        android:entryValues="@array/volume_steps_entries" />
+        android:title="@string/volume_steps_dtmf_title" />
 
     <ListPreference
+        android:entries="@array/volume_steps_entries"
+        android:entryValues="@array/volume_steps_entries"
         android:key="volume_steps_music"
-        android:title="@string/volume_steps_music_title"
-        android:entries="@array/volume_steps_entries"
-        android:entryValues="@array/volume_steps_entries" />
+        android:title="@string/volume_steps_music_title" />
 
     <ListPreference
+        android:entries="@array/volume_steps_entries"
+        android:entryValues="@array/volume_steps_entries"
         android:key="volume_steps_notification"
-        android:title="@string/volume_steps_notification_title"
-        android:entries="@array/volume_steps_entries"
-        android:entryValues="@array/volume_steps_entries" />
+        android:title="@string/volume_steps_notification_title" />
 
     <ListPreference
+        android:entries="@array/volume_steps_entries"
+        android:entryValues="@array/volume_steps_entries"
         android:key="volume_steps_ring"
-        android:title="@string/volume_steps_ring_title"
-        android:entries="@array/volume_steps_entries"
-        android:entryValues="@array/volume_steps_entries" />
+        android:title="@string/volume_steps_ring_title" />
 
     <ListPreference
+        android:entries="@array/volume_steps_entries"
+        android:entryValues="@array/volume_steps_entries"
         android:key="volume_steps_system"
-        android:title="@string/volume_steps_system_title"
-        android:entries="@array/volume_steps_entries"
-        android:entryValues="@array/volume_steps_entries" />
+        android:title="@string/volume_steps_system_title" />
 
     <ListPreference
-        android:key="volume_steps_voice_call"
-        android:title="@string/volume_steps_voice_call_title"
         android:entries="@array/volume_steps_entries"
-        android:entryValues="@array/volume_steps_entries" />
+        android:entryValues="@array/volume_steps_entries"
+        android:key="volume_steps_voice_call"
+        android:title="@string/volume_steps_voice_call_title" />
 
 </PreferenceScreen>

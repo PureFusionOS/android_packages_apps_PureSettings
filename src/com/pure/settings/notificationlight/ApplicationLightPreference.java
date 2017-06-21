@@ -33,12 +33,11 @@ import android.widget.TextView;
 import com.android.settings.R;
 
 public class ApplicationLightPreference extends Preference implements DialogInterface.OnDismissListener,
-            View.OnLongClickListener {
+        View.OnLongClickListener {
 
-    private static String TAG = "AppLightPreference";
     public static final int DEFAULT_TIME = 1000;
     public static final int DEFAULT_COLOR = 0xFFFFFF; //White
-
+    private static String TAG = "AppLightPreference";
     private ImageView mLightColorView;
     private TextView mOnValueView;
     private TextView mOffValueView;
@@ -49,11 +48,6 @@ public class ApplicationLightPreference extends Preference implements DialogInte
     private int mOnValue;
     private int mOffValue;
     private boolean mOnOffChangeable;
-
-    public interface ItemLongClickListener {
-        public boolean onItemLongClick(String key);
-    }
-
     private ItemLongClickListener mLongClickListener;
 
     /**
@@ -99,6 +93,17 @@ public class ApplicationLightPreference extends Preference implements DialogInte
         mOffValue = offValue;
         mOnOffChangeable = onOffChangeable;
         init();
+    }
+
+    /**
+     * Utility methods
+     */
+    private static ShapeDrawable createOvalShape(int size, int color) {
+        ShapeDrawable shape = new ShapeDrawable(new OvalShape());
+        shape.setIntrinsicHeight(size);
+        shape.setIntrinsicWidth(size);
+        shape.getPaint().setColor(color);
+        return shape;
     }
 
     private void init() {
@@ -185,25 +190,25 @@ public class ApplicationLightPreference extends Preference implements DialogInte
 
     public Dialog getDialog() {
         final LightSettingsDialog d = new LightSettingsDialog(getContext(),
-                0xFF000000 + mColorValue, mOnValue, mOffValue, mOnOffChangeable); 
+                0xFF000000 + mColorValue, mOnValue, mOffValue, mOnOffChangeable);
 
         d.setButton(AlertDialog.BUTTON_POSITIVE, mResources.getString(R.string.dlg_ok),
                 new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mColorValue =  d.getColor() & 0x00FFFFFF; // strip alpha, led does not support it
-                mOnValue = d.getPulseSpeedOn();
-                mOffValue = d.getPulseSpeedOff();
-                updatePreferenceViews();
-                callChangeListener(this);
-            }
-        });
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mColorValue = d.getColor() & 0x00FFFFFF; // strip alpha, led does not support it
+                        mOnValue = d.getPulseSpeedOn();
+                        mOffValue = d.getPulseSpeedOff();
+                        updatePreferenceViews();
+                        callChangeListener(this);
+                    }
+                });
         d.setButton(AlertDialog.BUTTON_NEGATIVE, mResources.getString(R.string.cancel),
                 new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
 
         return d;
     }
@@ -226,22 +231,22 @@ public class ApplicationLightPreference extends Preference implements DialogInte
         updatePreferenceViews();
     }
 
+    public int getOnValue() {
+        return mOnValue;
+    }
+
     public void setOnValue(int value) {
         mOnValue = value;
         updatePreferenceViews();
     }
 
-    public int getOnValue() {
-        return mOnValue;
+    public int getOffValue() {
+        return mOffValue;
     }
 
     public void setOffValue(int value) {
         mOffValue = value;
         updatePreferenceViews();
-    }
-
-    public int getOffValue() {
-        return mOffValue;
     }
 
     public void setAllValues(int color, int onValue, int offValue) {
@@ -267,17 +272,6 @@ public class ApplicationLightPreference extends Preference implements DialogInte
 
     public void setOnOffChangeable(boolean value) {
         mOnOffChangeable = value;
-    }
-
-    /**
-     * Utility methods
-     */
-    private static ShapeDrawable createOvalShape(int size, int color) {
-        ShapeDrawable shape = new ShapeDrawable(new OvalShape());
-        shape.setIntrinsicHeight(size);
-        shape.setIntrinsicWidth(size);
-        shape.getPaint().setColor(color);
-        return shape;
     }
 
     private String mapLengthValue(Integer time) {
@@ -315,5 +309,9 @@ public class ApplicationLightPreference extends Preference implements DialogInte
         }
 
         return getContext().getString(R.string.custom_time);
+    }
+
+    public interface ItemLongClickListener {
+        boolean onItemLongClick(String key);
     }
 }

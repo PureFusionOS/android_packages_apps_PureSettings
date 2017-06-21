@@ -28,9 +28,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.text.InputFilter;
 import android.text.InputFilter.LengthFilter;
+import android.text.TextWatcher;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +49,6 @@ import com.android.settings.R;
 import com.pure.settings.notificationlight.ColorPickerView.OnColorChangedListener;
 
 import java.util.ArrayList;
-import java.util.IllegalFormatException;
 import java.util.Locale;
 
 public class LightSettingsDialog extends AlertDialog implements
@@ -77,6 +76,25 @@ public class LightSettingsDialog extends AlertDialog implements
     private int mLedLastColor;
     private int mLedLastSpeedOn;
     private int mLedLastSpeedOff;
+    private Handler mLedHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            updateLed();
+        }
+    };
+    private AdapterView.OnItemSelectedListener mPulseSelectionListener =
+            new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if (parent == mPulseSpeedOn) {
+                        mPulseSpeedOff.setEnabled(mPulseSpeedOn.isEnabled() && getPulseSpeedOn() != 1);
+                    }
+                    updateLed();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            };
 
     /**
      * @param context
@@ -85,7 +103,7 @@ public class LightSettingsDialog extends AlertDialog implements
      * @param initialSpeedOff
      */
     protected LightSettingsDialog(Context context, int initialColor, int initialSpeedOn,
-            int initialSpeedOff) {
+                                  int initialSpeedOff) {
         super(context);
 
         init(context, initialColor, initialSpeedOn, initialSpeedOff, true);
@@ -99,14 +117,14 @@ public class LightSettingsDialog extends AlertDialog implements
      * @param onOffChangeable
      */
     protected LightSettingsDialog(Context context, int initialColor, int initialSpeedOn,
-            int initialSpeedOff, boolean onOffChangeable) {
+                                  int initialSpeedOff, boolean onOffChangeable) {
         super(context);
 
         init(context, initialColor, initialSpeedOn, initialSpeedOff, onOffChangeable);
     }
 
     private void init(Context context, int color, int speedOn, int speedOff,
-            boolean onOffChangeable) {
+                      boolean onOffChangeable) {
         mNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -122,8 +140,8 @@ public class LightSettingsDialog extends AlertDialog implements
      * This function sets up the dialog with the proper values.  If the speedOff parameters
      * has a -1 value disable both spinners
      *
-     * @param color - the color to set
-     * @param speedOn - the flash time in ms
+     * @param color    - the color to set
+     * @param speedOn  - the flash time in ms
      * @param speedOff - the flash length in ms
      */
     private void setUp(int color, int speedOn, int speedOff, boolean onOffChangeable) {
@@ -181,21 +199,6 @@ public class LightSettingsDialog extends AlertDialog implements
         updateLed();
     }
 
-    private AdapterView.OnItemSelectedListener mPulseSelectionListener =
-            new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            if (parent == mPulseSpeedOn) {
-                mPulseSpeedOff.setEnabled(mPulseSpeedOn.isEnabled() && getPulseSpeedOn() != 1);
-            }
-            updateLed();
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-        }
-    };
-
     @Override
     public Bundle onSaveInstanceState() {
         Bundle state = super.onSaveInstanceState();
@@ -238,7 +241,7 @@ public class LightSettingsDialog extends AlertDialog implements
     }
 
     public void setAlphaSliderVisible(boolean visible) {
-        mHexColorInput.setFilters(new InputFilter[] { new InputFilter.LengthFilter(visible ? 8 : 6) } );
+        mHexColorInput.setFilters(new InputFilter[]{new InputFilter.LengthFilter(visible ? 8 : 6)});
         mColorPicker.setAlphaSliderVisible(visible);
     }
 
@@ -260,12 +263,6 @@ public class LightSettingsDialog extends AlertDialog implements
         // return 0 if 'Always on' is selected
         return getPulseSpeedOn() == 1 ? 0 : ((Pair<String, Integer>) mPulseSpeedOff.getSelectedItem()).second;
     }
-
-    private Handler mLedHandler = new Handler() {
-        public void handleMessage(Message msg) {
-            updateLed();
-        }
-    };
 
     private void updateLed() {
         if (!mReadyForLed) {
@@ -314,6 +311,47 @@ public class LightSettingsDialog extends AlertDialog implements
         mLedLastColor = 0;
     }
 
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        String hexColor = mHexColorInput.getText().toString();
+        if (!hexColor.isEmpty()) {
+            try {
+                int color = Color.parseColor('#' + hexColor);
+                if (!mColorPicker.isAlphaSliderVisible()) {
+                    color |= 0xFF000000; // set opaque
+                }
+                mColorPicker.setColor(color);
+                mNewColor.setColor(color);
+                updateLed();
+                if (mListener != null) {
+                    mListener.onColorChanged(color);
+                }
+            } catch (IllegalArgumentException ex) {
+                // Number format is incorrect, ignore
+            }
+        }
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if (!hasFocus) {
+            mHexColorInput.removeTextChangedListener(this);
+            InputMethodManager inputMethodManager = (InputMethodManager) getContext()
+                    .getSystemService(Activity.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        } else {
+            mHexColorInput.addTextChangedListener(this);
+        }
+    }
+
     class PulseSpeedAdapter extends BaseAdapter implements SpinnerAdapter {
         private ArrayList<Pair<String, Integer>> times;
 
@@ -323,7 +361,7 @@ public class LightSettingsDialog extends AlertDialog implements
             String[] time_names = getContext().getResources().getStringArray(timeNamesResource);
             String[] time_values = getContext().getResources().getStringArray(timeValuesResource);
 
-            for(int i = 0; i < time_values.length; ++i) {
+            for (int i = 0; i < time_values.length; ++i) {
                 times.add(new Pair<String, Integer>(time_names[i], Integer.decode(time_values[i])));
             }
 
@@ -335,10 +373,10 @@ public class LightSettingsDialog extends AlertDialog implements
          * "Custom" time entry in the spinner in case this time value does not
          * match any of the predefined ones in the array.
          *
-         * @param timeNamesResource The time entry names array
+         * @param timeNamesResource  The time entry names array
          * @param timeValuesResource The time entry values array
-         * @param customTime Current time value that might be one of the
-         *            predefined values or a totally custom value
+         * @param customTime         Current time value that might be one of the
+         *                           predefined values or a totally custom value
          */
         public PulseSpeedAdapter(int timeNamesResource, int timeValuesResource, Integer customTime) {
             this(timeNamesResource, timeValuesResource);
@@ -392,47 +430,6 @@ public class LightSettingsDialog extends AlertDialog implements
             ((TextView) view.findViewById(R.id.textViewName)).setText(entry.first);
 
             return view;
-        }
-    }
-
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-        String hexColor = mHexColorInput.getText().toString();
-        if (!hexColor.isEmpty()) {
-            try {
-                int color = Color.parseColor('#' + hexColor);
-                if (!mColorPicker.isAlphaSliderVisible()) {
-                    color |= 0xFF000000; // set opaque
-                }
-                mColorPicker.setColor(color);
-                mNewColor.setColor(color);
-                updateLed();
-                if (mListener != null) {
-                    mListener.onColorChanged(color);
-                }
-            } catch (IllegalArgumentException ex) {
-                // Number format is incorrect, ignore
-            }
-        }
-    }
-
-    @Override
-    public void onFocusChange(View v, boolean hasFocus) {
-        if (!hasFocus) {
-            mHexColorInput.removeTextChangedListener(this);
-            InputMethodManager inputMethodManager = (InputMethodManager) getContext()
-                    .getSystemService(Activity.INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
-        } else {
-            mHexColorInput.addTextChangedListener(this);
         }
     }
 }

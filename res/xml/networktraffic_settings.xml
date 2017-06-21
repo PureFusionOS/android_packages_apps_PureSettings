@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2017 The Pure Nexus Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2017 The Pure Nexus Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -17,45 +16,45 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <ListPreference
-        android:key="network_traffic_state"
-        android:title="@string/show_network_traffic_state"
         android:entries="@array/show_network_traffic_state_entries"
         android:entryValues="@array/show_network_traffic_state_values"
-        android:persistent="false" />
+        android:key="network_traffic_state"
+        android:persistent="false"
+        android:title="@string/show_network_traffic_state" />
 
     <ListPreference
-        android:key="network_traffic_unit"
-        android:title="@string/show_network_traffic_unit"
         android:entries="@array/show_network_traffic_unit_entries"
         android:entryValues="@array/show_network_traffic_unit_values"
-        android:persistent="false" />
+        android:key="network_traffic_unit"
+        android:persistent="false"
+        android:title="@string/show_network_traffic_unit" />
 
     <ListPreference
-        android:key="network_traffic_period"
-        android:title="@string/show_network_traffic_frequency"
         android:entries="@array/show_network_traffic_frequency_entries"
         android:entryValues="@array/show_network_traffic_frequency_values"
-        android:persistent="false" />
+        android:key="network_traffic_period"
+        android:persistent="false"
+        android:title="@string/show_network_traffic_frequency" />
 
     <SwitchPreference
+        android:defaultValue="false"
         android:key="network_traffic_hidearrow"
-        android:title="@string/network_traffic_hidearrow"
         android:summary="@string/network_traffic_hidearrow_summary"
-        android:defaultValue="false" />
+        android:title="@string/network_traffic_hidearrow" />
 
     <SwitchPreference
+        android:defaultValue="false"
         android:key="network_traffic_autohide"
-        android:title="@string/network_traffic_autohide"
         android:summary="@string/network_traffic_autohide_summary"
-        android:defaultValue="false" />
+        android:title="@string/network_traffic_autohide" />
 
     <com.pure.settings.preferences.CustomSeekBarPreference
-        android:key="network_traffic_autohide_threshold"
-        android:title="@string/network_traffic_autohide_threshold"
-        android:max="100"
-        settings:min="0"
-        settings:units="kB/s"
         android:dependency="network_traffic_autohide"
-        android:persistent="false" />
+        android:key="network_traffic_autohide_threshold"
+        android:max="100"
+        android:persistent="false"
+        android:title="@string/network_traffic_autohide_threshold"
+        settings:min="0"
+        settings:units="kB/s" />
 
 </PreferenceScreen>

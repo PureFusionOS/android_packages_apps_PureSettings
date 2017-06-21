@@ -17,22 +17,22 @@
 
     <com.pure.settings.preferences.CustomSeekBarPreference
         android:key="navbar_height_portrait"
-        android:title="@string/navigation_bar_height_title"
         android:max="135"
+        android:title="@string/navigation_bar_height_title"
         settings:min="65"
         settings:units="%" />
 
     <com.pure.settings.preferences.CustomSeekBarPreference
         android:key="navbar_height_landscape"
-        android:title="@string/navigation_bar_height_landscape_title"
         android:max="135"
+        android:title="@string/navigation_bar_height_landscape_title"
         settings:min="65"
         settings:units="%" />
 
     <com.pure.settings.preferences.CustomSeekBarPreference
         android:key="navbar_width"
-        android:title="@string/navigation_bar_width_title"
         android:max="135"
+        android:title="@string/navigation_bar_width_title"
         settings:min="65"
         settings:units="%" />
 

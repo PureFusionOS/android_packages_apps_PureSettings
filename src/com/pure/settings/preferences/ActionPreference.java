@@ -20,7 +20,9 @@
 
 package com.pure.settings.preferences;
 
-import java.util.Map;
+import android.content.Context;
+import android.support.v7.preference.Preference;
+import android.util.AttributeSet;
 
 import com.android.internal.utils.du.ActionConstants.ConfigMap;
 import com.android.internal.utils.du.ActionConstants.Defaults;
@@ -28,9 +30,7 @@ import com.android.internal.utils.du.ActionHolder;
 import com.android.internal.utils.du.Config.ActionConfig;
 import com.android.internal.utils.du.Config.ButtonConfig;
 
-import android.content.Context;
-import android.support.v7.preference.Preference;
-import android.util.AttributeSet;
+import java.util.Map;
 
 public class ActionPreference extends Preference implements ActionHolder {
     private Defaults mDefaults;
@@ -51,7 +51,7 @@ public class ActionPreference extends Preference implements ActionHolder {
     }
 
     public ActionPreference(Context context, AttributeSet attrs, int defStyleAttr,
-            int defStyleRes) {
+                            int defStyleRes) {
         super(context, attrs);
     }
 
@@ -75,7 +75,7 @@ public class ActionPreference extends Preference implements ActionHolder {
         mDefaults = defaults;
         final String tag = this.getKey();
         for (Map.Entry<String, ConfigMap> entry : defaults.getActionMap().entrySet()) {
-            if (((String) entry.getKey()).equals(tag)) {
+            if (entry.getKey().equals(tag)) {
                 mMap = entry.getValue();
                 break;
             }

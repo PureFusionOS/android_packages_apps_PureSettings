@@ -25,7 +25,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
@@ -41,12 +40,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.pure.settings.preferences.SystemSettingSwitchPreference;
 import com.pure.settings.utils.PackageListAdapter;
 import com.pure.settings.utils.PackageListAdapter.PackageItem;
-import com.pure.settings.preferences.SystemSettingSwitchPreference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,15 +53,14 @@ import java.util.Map;
 
 public class NotificationLightSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, ApplicationLightPreference.ItemLongClickListener {
+    public static final int ACTION_TEST = 0;
+    public static final int ACTION_DELETE = 1;
     private static final String TAG = "NotificationLightSettings";
-
     private static final String NOTIFICATION_LIGHT_PULSE_DEFAULT_COLOR = "notification_light_pulse_default_color";
     private static final String NOTIFICATION_LIGHT_PULSE_DEFAULT_LED_ON = "notification_light_pulse_default_led_on";
     private static final String NOTIFICATION_LIGHT_PULSE_DEFAULT_LED_OFF = "notification_light_pulse_default_led_off";
     private static final String DEFAULT_PREF = "default";
     private static final String KEY_ALLOW_LIGHTS = "allow_lights";
-    public static final int ACTION_TEST = 0;
-    public static final int ACTION_DELETE = 1;
     private static final int MENU_ADD = 0;
     private static final int DIALOG_APPS = 0;
 
@@ -96,10 +93,10 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
                 com.android.internal.R.bool.config_multiColorNotificationLed);
 
         // Remove of the "Allow notification light" setting if an led is not supported
-            if (!getResources().getBoolean(
-                    com.android.internal.R.bool.config_intrusiveNotificationLed)) {
-                prefSet.removePreference(findPreference(KEY_ALLOW_LIGHTS));
-            }
+        if (!getResources().getBoolean(
+                com.android.internal.R.bool.config_intrusiveNotificationLed)) {
+            prefSet.removePreference(findPreference(KEY_ALLOW_LIGHTS));
+        }
 
         // Get the system defined default notification color
         mDefaultColor =
@@ -271,7 +268,7 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
             mPackageList = value;
         }
         Settings.System.putString(getContentResolver(),
-                                  Settings.System.NOTIFICATION_LIGHT_PULSE_CUSTOM_VALUES, value);
+                Settings.System.NOTIFICATION_LIGHT_PULSE_CUSTOM_VALUES, value);
     }
 
     /**
@@ -417,6 +414,7 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
 
         /**
          * Stores all the application values in one call
+         *
          * @param name
          * @param color
          * @param timeon
@@ -427,18 +425,6 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
             this.color = color;
             this.timeon = timeon;
             this.timeoff = timeoff;
-        }
-
-        public String toString() {
-            StringBuilder builder = new StringBuilder();
-            builder.append(name);
-            builder.append("=");
-            builder.append(color);
-            builder.append(";");
-            builder.append(timeon);
-            builder.append(";");
-            builder.append(timeoff);
-            return builder.toString();
         }
 
         public static Package fromString(String value) {
@@ -460,6 +446,18 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
             } catch (NumberFormatException e) {
                 return null;
             }
+        }
+
+        public String toString() {
+            StringBuilder builder = new StringBuilder();
+            builder.append(name);
+            builder.append("=");
+            builder.append(color);
+            builder.append(";");
+            builder.append(timeon);
+            builder.append(";");
+            builder.append(timeoff);
+            return builder.toString();
         }
 
     }

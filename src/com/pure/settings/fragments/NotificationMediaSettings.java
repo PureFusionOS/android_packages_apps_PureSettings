@@ -16,23 +16,21 @@
 
 package com.pure.settings.fragments;
 
-import android.content.res.Resources;
 import android.content.ContentResolver;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
 public class NotificationMediaSettings extends SettingsPreferenceFragment
-         implements OnPreferenceChangeListener {
+        implements OnPreferenceChangeListener {
 
     private static final String KEY_SHOW_TICKER = "status_bar_show_ticker";
 
@@ -58,11 +56,11 @@ public class NotificationMediaSettings extends SettingsPreferenceFragment
         return MetricsEvent.PURE;
     }
 
-     @Override
-     public boolean onPreferenceChange(Preference preference, Object newValue) {
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
         ContentResolver resolver = getActivity().getContentResolver();
         if (preference == mTicker) {
-            int tickerMode = Integer.parseInt(((String) newValue).toString());
+            int tickerMode = Integer.parseInt(newValue.toString());
             Settings.System.putIntForUser(getContentResolver(),
                     Settings.System.STATUS_BAR_SHOW_TICKER, tickerMode,
                     UserHandle.USER_CURRENT);

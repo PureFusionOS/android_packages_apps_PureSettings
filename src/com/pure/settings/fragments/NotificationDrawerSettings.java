@@ -19,7 +19,6 @@ package com.pure.settings.fragments;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -31,15 +30,13 @@ import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.pure.settings.preferences.CustomSeekBarPreference;
 import com.pure.settings.preferences.SecureSettingSwitchPreference;
 
-import com.pure.settings.preferences.CustomSeekBarPreference;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class NotificationDrawerSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
@@ -57,9 +54,9 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment imple
     private static final String CUSTOM_HEADER_IMAGE_SHADOW = "status_bar_custom_header_shadow";
     private static final String CUSTOM_HEADER_PROVIDER = "custom_header_provider";
     private static final String CUSTOM_HEADER_BROWSE = "custom_header_browse";
-
-    private ListPreference mQuickPulldown;
+    private static final int MY_USER_ID = UserHandle.myUserId();
     ListPreference mSmartPulldown;
+    private ListPreference mQuickPulldown;
     private SecureSettingSwitchPreference mQsLock;
     private CustomSeekBarPreference mQsColumns;
     private CustomSeekBarPreference mRowsPortrait;
@@ -69,8 +66,6 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment imple
     private CustomSeekBarPreference mHeaderShadow;
     private PreferenceScreen mHeaderBrowse;
     private String mDaylightHeaderProvider;
-
-    private static final int MY_USER_ID = UserHandle.myUserId();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -201,12 +196,12 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment imple
             int valueIndex = mDaylightHeaderPack.findIndexOfValue(value);
             mDaylightHeaderPack.setSummary(mDaylightHeaderPack.getEntries()[valueIndex]);
             return true;
-         } else if (preference == mHeaderShadow) {
+        } else if (preference == mHeaderShadow) {
             int headerShadow = (Integer) newValue;
             Settings.System.putInt(resolver,
                     Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, headerShadow);
             return true;
-         } else if (preference == mHeaderProvider) {
+        } else if (preference == mHeaderProvider) {
             String value = (String) newValue;
             Settings.System.putString(resolver,
                     Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER, value);
@@ -275,7 +270,7 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment imple
         i.setAction("org.omnirom.DaylightHeaderPack1");
         for (ResolveInfo r : packageManager.queryIntentActivities(i, 0)) {
             String packageName = r.activityInfo.packageName;
-            values.add(packageName  + "/" + r.activityInfo.name);
+            values.add(packageName + "/" + r.activityInfo.name);
 
             String label = r.activityInfo.loadLabel(getPackageManager()).toString();
             if (label == null) {

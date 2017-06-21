@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2017 The Pure Nexus Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2017 The Pure Nexus Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,7 +12,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources>
     <!-- Battery Bar -->
     <string-array name="battery_bar_entries" translatable="false">
         <item>@string/battery_bar_hide</item>
@@ -546,7 +545,7 @@
         <item>30000</item>
     </string-array>
 
-     <!-- Ticker mode -->
+    <!-- Ticker mode -->
     <string-array name="ticker_mode_entries">
         <item>@string/ticker_disabled</item>
         <item>@string/ticker_enabled</item>
