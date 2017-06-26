@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2017 The Pure Nexus Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2017 Pure Fusion OS
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -533,7 +533,7 @@
     <string name="ticker_media_enabled">Notifications and music ticker</string>
 
     <!-- OTA Updates-->
-    <string name="ota_title">PureNexus updates</string>
+    <string name="ota_title">Pure Fusion updates</string>
 
     <!-- Recents Membar -->
     <string name="systemui_recents_mem_display_title">Show Memory Bar</string>
