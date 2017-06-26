@@ -22,9 +22,11 @@
             android:key="hardware_keys_disable"
             android:title="@string/hardware_keys_disable_title" />
 
-        <SwitchPreference
+        <SeekBarPreference
             android:dependency="hardware_keys_disable"
             android:key="button_brightness"
+            android:max="255"
+            android:default="75"
             android:persistent="false"
             android:title="@string/button_brightness_title" />
 
