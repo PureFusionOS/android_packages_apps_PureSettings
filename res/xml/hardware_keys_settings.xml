@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--  Copyright (C) 2016 The Dirty Unicorns Project
+<?xml version="1.0" encoding="utf-8"?>
+<!--  Copyright (C) 2016 The Dirty Unicorns Project
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 2 of the License, or
@@ -11,7 +12,9 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <PreferenceCategory
         android:key="hardware_keys"
@@ -22,11 +25,14 @@
             android:key="hardware_keys_disable"
             android:title="@string/hardware_keys_disable_title" />
 
-        <SwitchPreference
-            android:dependency="hardware_keys_disable"
+        <com.pure.settings.preferences.CustomSeekBarPreference
             android:key="button_brightness"
-            android:persistent="false"
-            android:title="@string/button_brightness_title" />
+            android:title="@string/button_brightness_title"
+            android:dependency="hardware_keys_disable"
+            settings:max="255"
+            settings:min="0"
+            settings:units=""
+            android:persistent="false" />
 
         <ListPreference
             android:dependency="button_brightness"
