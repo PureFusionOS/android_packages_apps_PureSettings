@@ -11,7 +11,8 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <PreferenceCategory
         android:key="hardware_keys"
@@ -22,11 +23,14 @@
             android:key="hardware_keys_disable"
             android:title="@string/hardware_keys_disable_title" />
 
-        <SwitchPreference
+         <com.pure.settings.preferences.CustomSeekBarPreference
+	    android:key="button_brightness"
+            android:title="@string/button_brightness_title"
             android:dependency="hardware_keys_disable"
-            android:key="button_brightness"
-            android:persistent="false"
-            android:title="@string/button_brightness_title" />
+            settings:max="255"
+	    settings:min="0"
+	    settings:units=""
+	    android:persistent="false" />
 
         <ListPreference
             android:dependency="button_brightness"
