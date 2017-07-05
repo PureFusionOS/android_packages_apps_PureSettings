@@ -66,6 +66,12 @@
         android:title="@string/status_bar_notif_count_title" />
 
     <com.pure.settings.preferences.SystemSettingSwitchPreference
+        android:key="data_disabled_icon"
+        android:title="@string/data_disabled_icon_title"
+        android:summary="@string/data_disabled_icon_summary"
+        android:defaultValue="true"/>
+
+    <com.pure.settings.preferences.SystemSettingSwitchPreference
         android:defaultValue="false"
         android:key="bluetooth_show_battery"
         android:summary="@string/bluetooth_battery_summary"
