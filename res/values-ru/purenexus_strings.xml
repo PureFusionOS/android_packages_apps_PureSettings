@@ -490,8 +490,13 @@
     <string name="backlight_timeout_15s">15 секунд</string>
     <string name="backlight_timeout_20s">20 секунд</string>
     <string name="backlight_timeout_30s">30 секунд</string>
+
     <!-- Enable keys backlight-->
     <string name="button_brightness_title">Яркость подсветки кнопок</string>
+    <!-- Buttons light only when touched -->
+    <string name="button_backlight_on_touch_only_title">Подсветка при касании</string>
+    <string name="button_backlight_on_touch_only_summary">Включать подсветку клавиш только после касания</string>
+
     <!-- Navbar dynamic color -->
     <string name="nav_bar_dynamic_title">Динамический цвет панели навигации</string>
     <string name="nav_bar_dynamic_summary">Включите/выключите этот переключатель для панели навигации, чтобы адаптировать панель к стандартному черному цвету. Перезапустите желаемое приложение, чтобы увидеть эффект</string>
