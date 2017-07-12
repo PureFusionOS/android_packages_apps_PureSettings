@@ -145,7 +145,7 @@ public class HardwareKeysSettings extends ActionFragment implements OnPreference
             if (mBacklightTimeout != null) {
                 mBacklightTimeout.setOnPreferenceChangeListener(this);
                 int BacklightTimeout = Settings.System.getInt(getContentResolver(),
-                        Settings.System.BUTTON_BACKLIGHT_TIMEOUT, 5000);
+                        Settings.System.BUTTON_BACKLIGHT_TIMEOUT, 3000);
                 mBacklightTimeout.setValue(Integer.toString(BacklightTimeout));
                 mBacklightTimeout.setSummary(mBacklightTimeout.getEntry());
             }
