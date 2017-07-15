@@ -94,10 +94,9 @@
         <PreferenceScreen
             android:key="pure_ota"
             android:title="@string/ota_title">
-            <intent
-                android:action="android.intent.action.MAIN"
-                android:targetClass="com.purenexus.ota.UpdatesActivity"
-                android:targetPackage="com.purenexus.ota" />
+            <intent android:action="android.intent.action.MAIN"
+                    android:targetPackage="com.purenexus.ota"
+                    android:targetClass="com.purenexus.ota.MainActivity" />
         </PreferenceScreen>
 
     </PreferenceCategory>
