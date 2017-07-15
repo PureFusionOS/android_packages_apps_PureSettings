@@ -536,9 +536,6 @@
     <string name="ticker_enabled">Notification ticker</string>
     <string name="ticker_media_enabled">Notifications and music ticker</string>
 
-    <!-- OTA Updates-->
-    <string name="ota_title">Pure Fusion updates</string>
-
     <!-- Recents Membar -->
     <string name="systemui_recents_mem_display_title">Show Memory Bar</string>
     <string name="systemui_recents_mem_display_summaryOn">RAM bar enabled</string>
