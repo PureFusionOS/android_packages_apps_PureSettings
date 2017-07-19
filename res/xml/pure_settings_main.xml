@@ -86,11 +86,6 @@
             android:key="pure_misc_settings"
             android:title="@string/misc_settings_title" />
 
-        <PreferenceScreen
-            android:fragment="com.pure.settings.fragments.Changelog"
-            android:key="pure_changelog"
-            android:title="@string/changelog_title" />
-
     </PreferenceCategory>
 
 </PreferenceScreen>
