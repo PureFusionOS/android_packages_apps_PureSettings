@@ -297,6 +297,9 @@
     <string name="power_menu_bug_report_title">Bug report</string>
     <string name="power_menu_sound_title">Sound panel</string>
     <string name="power_menu_bug_report_disabled">Bug reporting is disabled in development settings</string>
+    <!-- MTP Dirty Hack -->
+    <string name="enable_mtp_dirtyhack_title">MTP instead Charging</string>
+    <string name="enable_mtp_dirtyhack_summary">Enable MTP instead Charging after connect to PC</string>
     <!-- Power menu on secure lockscreen -->
     <string name="lockscreen_enable_power_menu_title">Show power menu on secure lock screen</string>
 

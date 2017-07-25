@@ -49,4 +49,10 @@
 
     </PreferenceCategory>
 
+        <com.pure.settings.preferences.SystemSettingSwitchPreference
+            android:key="mtp_dirty_hack"
+            android:title="@string/enable_mtp_dirtyhack_title"
+            android:summary="@string/enable_mtp_dirtyhack_summary"
+            android:defaultValue="true" />
+
 </PreferenceScreen>

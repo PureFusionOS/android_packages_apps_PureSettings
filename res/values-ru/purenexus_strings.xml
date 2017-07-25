@@ -285,6 +285,9 @@
     <string name="power_menu_bug_report_title">Отчёт об ошибке</string>
     <string name="power_menu_sound_title">Звуковая панель</string>
     <string name="power_menu_bug_report_disabled">Сообщения об ошибках выключены в настройках разработчика</string>
+    <!-- MTP Dirty Hack -->
+    <string name="enable_mtp_dirtyhack_title">MTP вместо Зарядки</string>
+    <string name="enable_mtp_dirtyhack_summary">Включить MTP вместо Зарядки при подключении к ПК</string>
     <!-- Power menu on secure lockscreen -->
     <string name="lockscreen_enable_power_menu_title">Показывать меню выключения на защищенном экране блокировки</string>
     <!-- Recent Apps fragment -->
