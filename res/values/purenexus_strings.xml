@@ -556,4 +556,12 @@
     <string name="wired_ringtone_focus_mode_title">Where to play ringtones from</string>
     <string name="wired_ringtone_focus_mode_dynamic">Wired headset if connected and playing music</string>
     <string name="wired_ringtone_focus_mode_stock">Speakerphone (default)</string>
+
+    <!-- Log fragment -->
+    <string name="log_settings_title">Logcat/Dmesg</string>
+    
+    <!-- Matlog LOGCAT Viewer -->
+    <string name="logcat_app_title">MatLog</string>
+    <string name="logcat_app_summary">Start app to collect logs</string>
+    
 </resources>
