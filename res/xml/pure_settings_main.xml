@@ -86,6 +86,11 @@
             android:key="pure_misc_settings"
             android:title="@string/misc_settings_title" />
 
+        <PreferenceScreen
+            android:fragment="com.pure.settings.fragments.LogSettings"
+            android:key="pure_log_settings"
+            android:title="@string/log_settings_title" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
