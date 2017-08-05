@@ -49,6 +49,12 @@
 
     </PreferenceCategory>
 
+    <com.pure.settings.preferences.SystemSettingSwitchPreference
+        android:key="sensor_block"
+        android:title="@string/sensor_block_title"
+        android:summary="@string/sensor_block_summary"
+        android:defaultValue="false" />
+
         <com.pure.settings.preferences.SystemSettingSwitchPreference
             android:key="mtp_dirty_hack"
             android:title="@string/enable_mtp_dirtyhack_title"
