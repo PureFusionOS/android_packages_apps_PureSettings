@@ -564,4 +564,8 @@
     <string name="logcat_app_title">MatLog</string>
     <string name="logcat_app_summary">Start app to collect logs</string>
     
+    <!-- ANBI -->
+    <string name="anbi_title">Accidental touch</string>
+    <string name="anbi_summary">Prevent interaction with navigation buttons while the screen is being touched</string>
+
 </resources>

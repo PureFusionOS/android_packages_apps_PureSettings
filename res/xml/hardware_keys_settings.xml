@@ -25,6 +25,11 @@
             android:key="hardware_keys_disable"
             android:title="@string/hardware_keys_disable_title" />
 
+        <com.pure.settings.preferences.SystemSettingSwitchPreference
+            android:key="anbi_enabled"
+            android:title="@string/anbi_title"
+            android:summary="@string/anbi_summary"/>
+
         <com.pure.settings.preferences.CustomSeekBarPreference
             android:key="button_brightness"
             android:title="@string/button_brightness_title"
