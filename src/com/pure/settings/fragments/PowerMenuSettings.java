@@ -59,6 +59,7 @@ public class PowerMenuSettings extends SettingsPreferenceFragment {
     private SwitchPreference mVoicePref;
     private SwitchPreference mBugReportPref;
     private SwitchPreference mSilentPref;
+    private SwitchPreference mEmergencyPref;
     private ArrayList<String> mLocalUserConfig = new ArrayList<String>();
     private String[] mAvailableActions;
     private String[] mAllActions;
@@ -112,6 +113,8 @@ public class PowerMenuSettings extends SettingsPreferenceFragment {
                 mBugReportPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_BUGREPORT);
             } else if (action.equals(GLOBAL_ACTION_KEY_SILENT)) {
                 mSilentPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_SILENT);
+            } else if  (action.equals(GLOBAL_ACTION_KEY_EMERGENCY)) {
+                mEmergencyPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_EMERGENCY);
             }
         }
 
@@ -193,6 +196,10 @@ public class PowerMenuSettings extends SettingsPreferenceFragment {
             mSilentPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_SILENT));
         }
 
+        if (mEmergencyPref != null) {
+            mEmergencyPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_EMERGENCY));
+        }
+
         updatePreferences();
     }
 
@@ -253,6 +260,10 @@ public class PowerMenuSettings extends SettingsPreferenceFragment {
         } else if (preference == mSilentPref) {
             value = mSilentPref.isChecked();
             updateUserConfig(value, GLOBAL_ACTION_KEY_SILENT);
+
+        } else if (preference == mEmergencyPref) {
+            value = mEmergencyPref.isChecked();
+            updateUserConfig(value, GLOBAL_ACTION_KEY_EMERGENCY);
 
         } else {
             return super.onPreferenceTreeClick(preference);
