@@ -356,6 +356,7 @@
         <item>assist</item>
         <item>voiceassist</item>
         <item>silent</item>
+		<item>emergency</item>
     </string-array>
 
     <!-- Quick Pulldown -->
