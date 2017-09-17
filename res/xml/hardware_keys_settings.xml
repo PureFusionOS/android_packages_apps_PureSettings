@@ -81,6 +81,13 @@
         android:key="home_key"
         android:title="@string/hardware_keys_home_key_title">
 
+        <SwitchPreference
+            android:key="home_wake_screen"
+            android:title="@string/button_wake_title"
+            android:summary="@string/home_wake_summary"
+            android:defaultValue="true" />
+
+
         <com.pure.settings.preferences.ActionPreference
             android:key="hwkeys_button_home_single_tap"
             android:summary="@string/hardware_keys_single_tap_summary"

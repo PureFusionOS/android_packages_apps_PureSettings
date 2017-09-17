@@ -52,6 +52,8 @@ public class HardwareKeysSettings extends ActionFragment implements OnPreference
     // Buttons Brightness
     private static final String KEY_BACKLIGHT_TIMEOUT = "backlight_timeout";
     private static final String KEY_BUTTON_BRIGHTNESS = "button_brightness";
+    // home wake screen
+    private static final String KEY_HOME_WAKE_SCREEN = "home_wake_screen";
     // category keys
     private static final String CATEGORY_HWKEY = "hardware_keys";
     private static final String CATEGORY_BACK = "back_key";
@@ -63,6 +65,7 @@ public class HardwareKeysSettings extends ActionFragment implements OnPreference
     private static final String CATEGORY_POWER = "power_key";
     private ListPreference mBacklightTimeout;
     private SwitchPreference mHwKeyDisable;
+    private SwitchPreference mHwKeyWakeDisable;
     private CustomSeekBarPreference mButtonBrightness;
 
     @Override
@@ -120,9 +123,19 @@ public class HardwareKeysSettings extends ActionFragment implements OnPreference
             prefScreen.removePreference(backCategory);
         }
 
+        mHwKeyWakeDisable = (SwitchPreference) findPreference(KEY_HOME_WAKE_SCREEN);
         // home key
         if (!hasHomeKey) {
             prefScreen.removePreference(homeCategory);
+            Settings.System.putInt(getActivity().getContentResolver(),Settings.System.HOME_WAKE_SCREEN, 0);
+        }else{
+            boolean homeCanWake = getResources().getBoolean(com.android.internal.R.bool.config_homeCanWake);
+            mHwKeyWakeDisable.setEnabled(homeCanWake);
+            mHwKeyWakeDisable.setChecked(homeCanWake ? (Settings.System.getInt(getActivity().getContentResolver(),
+                                             Settings.System.HOME_WAKE_SCREEN, 1) == 1) : false);
+            if (!homeCanWake) {
+                Settings.System.putInt(getActivity().getContentResolver(),Settings.System.HOME_WAKE_SCREEN, 0);
+            }
         }
 
         // App switch key (recents)
@@ -199,6 +212,11 @@ public class HardwareKeysSettings extends ActionFragment implements OnPreference
             int value = (Integer) newValue;
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.BUTTON_BRIGHTNESS, value * 1);
+            return true;
+        } else if (preference == mHwKeyWakeDisable) {
+            boolean value = (Boolean) newValue;
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.HOME_WAKE_SCREEN, value ? 1 : 0);
             return true;
         }
         return false;

@@ -530,6 +530,10 @@
     <!-- Buttons light only when touched -->
     <string name="button_backlight_on_touch_only_title">Button touch</string>
     <string name="button_backlight_on_touch_only_summary">Enable backlight with timeout only on button touch</string>
+
+    <!-- Home button wake up -->
+    <string name="button_wake_title">Wake up</string>
+    <string name="home_wake_summary">Pressing the home button will wake your device</string>
     
     <!-- Navbar dynamic color -->
     <string name="nav_bar_dynamic_title">Dynamic navbar color</string>
